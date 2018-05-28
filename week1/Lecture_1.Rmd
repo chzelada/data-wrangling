@@ -3,6 +3,13 @@ title: "Semana 1"
 output: html_notebook
 ---
 
+```{r "setup", include=FALSE}
+require(knitr)
+opts_knit$set(root.dir = "~/Documents/ds_minor/data-wrangling")
+```
+
+
+
 ## Objetivos
 
 1. Cargar Archivos de Texto a R (Python).
@@ -11,21 +18,46 @@ output: html_notebook
 
 ## Archivos de Texto
 
-
-```{r}
-setwd("~/Documents/ds_minor/data-wrangling")
-```
-
 ### Función readlines
 
 ```{r}
-readLines('../data/quijote.txt',n=10,skipNul = TRUE)
+text_file <- './data/quijote.txt'
+readLines(text_file,n=10,skipNul = TRUE)
 ```
 
 
 ```{r}
-quijote <- readLines('../data/quijote.txt',n=10,skipNul = TRUE)
+quijote <- readLines(text_file,n=10,skipNul = TRUE)
 str(quijote)
+```
+
+
+
+
+### Función read_lines y read_file
+```{r}
+library(readr)
+quijote_lines <- read_lines(text_file)
+str(quijote_lines)
+```
+
+```{r}
+quijote_lines[1:10]
+```
+
+
+```{r}
+quijote_file <- read_file(text_file) 
+str(quijote_file)
+```
+
+```{r}
+substr(quijote_file,0,150)
+```
+
+
+```{r}
+read_lines(text_file,skip = 10,n_max = 20)
 ```
 
 
