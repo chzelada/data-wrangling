@@ -1,0 +1,39 @@
+---
+title: "Semana 1"
+output: html_notebook
+---
+
+## Objetivos
+
+1. Cargar Archivos de Texto a R (Python).
+2. Entender los diferentes formatos de archivos de texto.
+3. Usar las diferentes opcines de las funciones para cargar archivos de texto.
+
+## Archivos de Texto
+
+
+```{r}
+setwd("~/Documents/ds_minor/data-wrangling")
+```
+
+### Función readlines
+
+```{r}
+readLines('../data/quijote.txt',n=10,skipNul = TRUE)
+```
+
+
+```{r}
+quijote <- readLines('../data/quijote.txt',n=10,skipNul = TRUE)
+str(quijote)
+```
+
+
+
+
+
+
+
+
+
+
