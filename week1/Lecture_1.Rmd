@@ -21,7 +21,7 @@ opts_knit$set(root.dir = "~/Documents/ds_minor/data-wrangling")
 ### Función readlines
 
 ```{r}
-text_file <- './data/quijote.txt'
+text_file <- '/data/quijote.txt'
 readLines(text_file,n=10,skipNul = TRUE)
 ```
 
@@ -60,11 +60,13 @@ substr(quijote_file,0,150)
 read_lines(text_file,skip = 10,n_max = 20)
 ```
 
+## archivo csv 
 
 
-
-
-
+```{r}
+hour<-read_csv("./data/hour.csv")
+head(hour)
+```
 
 
 
