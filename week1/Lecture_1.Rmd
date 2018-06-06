@@ -14,7 +14,7 @@ opts_knit$set(root.dir = "~/Documents/ds_minor/data-wrangling")
 
 1. Cargar Archivos de Texto a R (Python).
 2. Entender los diferentes formatos de archivos de texto.
-3. Usar las diferentes opcines de las funciones para cargar archivos de texto.
+3. Usar las diferentes opciones de las funciones para cargar archivos de texto.
 
 ## Archivos de Texto
 
