@@ -1,5 +1,5 @@
 ---
-title: "Lecture_2.Rmd"
+title: "Semana 2"
 author: "Tepi"
 date: "June 5, 2018"
 output: html_document
@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 1. Cargar Archivos de Texto en url a R.
 2. Crear conexiones a url para cargar archivos Rdata.
 3. Cargar archivos formato "dat".
+4. Obtener registros con base al nombre de fila.
 
 
 ##DAT file
@@ -23,12 +24,62 @@ df <- read.table("http://www.stats.ox.ac.uk/pub/datasets/csb/ch11b.dat",header =
 head(df)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+##Txt file from http:
+ Decathlon results 
+```{r}
+data<-read.table(file="http://www.sthda.com/upload/decathlon.txt") 
+head(data)
+str-(data)
+```
+ La primera fila del data set contiene el nombre de cada una de las columnas.
+ La estructura del data set muestra un error ya que cada columna se encuentra en formato de factor,
+ 
+ 
+```{r,cache=TRUE}
+#Agregar header TRUE para tener nombre de columnas.
+
+data<-read.table(file="http://www.sthda.com/upload/decathlon.txt",header = T) 
+head(data)
+str(data)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot
+Esto soluciona el error de estructura. Podemos ver que la variable name se exporta como factor y las restantes como número.
+
+
+### Accesar a fila por nombre de competidor. 
+
+```{r, cache=TRUE}
+data<-read.table(file="http://www.sthda.com/upload/decathlon.txt",header = T, row.names = 1,sep="\t") 
+
+data["CLAY",]
+
+
+
+
+```
+
+
+### Accesar a resultado específico.
+
+```{r, cache=TRUE}
+
+data["CLAY","Shot.put"]
+
+
+
+```
+
+
+
+## Ejercicio: 
+
+El data set presenta nombres duplicados en mayúscula y minúscula.
+Crear un formato de nombres en el cual cada registro se encuentre en mayúsculas y no se presenten duplicados.
+
+Nota: No pueden existir nombres de fila duplicados. 
+
+
+
+

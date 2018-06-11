@@ -180,7 +180,7 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li>Cargar Archivos de Texto a R (Python).</li>
 <li>Entender los diferentes formatos de archivos de texto.</li>
-<li>Usar las diferentes opcines de las funciones para cargar archivos de texto.</li>
+<li>Usar las diferentes opciones de las funciones para cargar archivos de texto.</li>
 </ol>
 </div>
 <div id="archivos-de-texto" class="section level2">
@@ -189,17 +189,33 @@ $(document).ready(function () {
 <h3>Función readlines</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGV4dF9maWxlIDwtICcvZGF0YS9xdWlqb3RlLnR4dCdcbnJlYWRMaW5lcyh0ZXh0X2ZpbGUsbj0xMCxza2lwTnVsID0gVFJVRSlcbmBgYCJ9 -->
-<pre class="r"><code>text_file &lt;- '/data/quijote.txt'
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGV4dF9maWxlIDwtICcuLi9kYXRhL3F1aWpvdGUudHh0J1xucmVhZExpbmVzKHRleHRfZmlsZSxuPTEwLHNraXBOdWwgPSBUUlVFKVxuYGBgIn0= -->
+<pre class="r"><code>text_file &lt;- '../data/quijote.txt'
 readLines(text_file,n=10,skipNul = TRUE)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiY2Fubm90IG9wZW4gZmlsZSAnL2RhdGEvcXVpam90ZS50eHQnOiBObyBzdWNoIGZpbGUgb3IgZGlyZWN0b3J5RXJyb3IgaW4gZmlsZShjb24sIFwiclwiKSA6IGNhbm5vdCBvcGVuIHRoZSBjb25uZWN0aW9uXG4ifQ== -->
-<pre><code>cannot open file '/data/quijote.txt': No such file or directoryError in file(con, &quot;r&quot;) : cannot open the connection</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkVMIElOR0VOSU9TTyBISURBTEdPIERPTiBRVUlKT1RFIERFIExBIE1BTkNIQVwiICAgICAgICAgICAgICAgICAgICBcbiBbMl0gXCJcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gWzNdIFwiTWlndWVsIGRlIENlcnZhbnRlcyBTYWF2ZWRyYVwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIFs0XSBcIlwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiBbNV0gXCIgICAgIENhcMODwq10dWxvIHByaW1lcm9cIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiBbNl0gXCJcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gWzddIFwiICAgICBRdWUgdHJhdGEgZGUgbGEgY29uZGljacODwrNuIHkgZWplcmNpY2lvIGRlbCBmYW1vc28gaGlkYWxnbyBELlwiXG4gWzhdIFwiUXVpam90ZSBkZSBsYSBcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIFs5XSBcIiAgICAgTWFuY2hhXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcblsxMF0gXCJcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4ifQ== -->
+<pre><code> [1] &quot;EL INGENIOSO HIDALGO DON QUIJOTE DE LA MANCHA&quot;                    
+ [2] &quot;&quot;                                                                 
+ [3] &quot;Miguel de Cervantes Saavedra&quot;                                     
+ [4] &quot;&quot;                                                                 
+ [5] &quot;     CapÃ­tulo primero&quot;                                           
+ [6] &quot;&quot;                                                                 
+ [7] &quot;     Que trata de la condiciÃ³n y ejercicio del famoso hidalgo D.&quot;
+ [8] &quot;Quijote de la &quot;                                                   
+ [9] &quot;     Mancha&quot;                                                      
+[10] &quot;&quot;                                                                 </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVpam90ZSA8LSByZWFkTGluZXModGV4dF9maWxlLG49MTAsc2tpcE51bCA9IFRSVUUpXG5zdHIocXVpam90ZSlcbmBgYCJ9 -->
+<pre class="r"><code>quijote &lt;- readLines(text_file,n=10,skipNul = TRUE)
+str(quijote)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIGNociBbMToxMF0gXCJFTCBJTkdFTklPU08gSElEQUxHTyBET04gUVVJSk9URSBERSBMQSBNQU5DSEFcIiBcIlwiIFwiTWlndWVsIGRlIENlcnZhbnRlcyBTYWF2ZWRyYVwiIFwiXCIgLi4uXG4ifQ== -->
+<pre><code> chr [1:10] &quot;EL INGENIOSO HIDALGO DON QUIJOTE DE LA MANCHA&quot; &quot;&quot; &quot;Miguel de Cervantes Saavedra&quot; &quot;&quot; ...</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -207,22 +223,83 @@ readLines(text_file,n=10,skipNul = TRUE)</code></pre>
 <h3>Función read_lines y read_file</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkcilcbnF1aWpvdGVfbGluZXMgPC0gcmVhZF9saW5lcyh0ZXh0X2ZpbGUpXG5zdHIocXVpam90ZV9saW5lcylcbmBgYCJ9 -->
+<pre class="r"><code>library(readr)
+quijote_lines &lt;- read_lines(text_file)
+str(quijote_lines)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIGNociBbMTo1NTM2XSBcIkVMIElOR0VOSU9TTyBISURBTEdPIERPTiBRVUlKT1RFIERFIExBIE1BTkNIQVwiIFwiXCIgXCJNaWd1ZWwgZGUgQ2VydmFudGVzIFNhYXZlZHJhXCIgXCJcIiAuLi5cbiJ9 -->
+<pre><code> chr [1:5536] &quot;EL INGENIOSO HIDALGO DON QUIJOTE DE LA MANCHA&quot; &quot;&quot; &quot;Miguel de Cervantes Saavedra&quot; &quot;&quot; ...</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVpam90ZV9saW5lc1sxOjEwXVxuYGBgIn0= -->
+<pre class="r"><code>quijote_lines[1:10]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkVMIElOR0VOSU9TTyBISURBTEdPIERPTiBRVUlKT1RFIERFIExBIE1BTkNIQVwiICAgICAgICAgICAgICAgICAgIFxuIFsyXSBcIlwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIFszXSBcIk1pZ3VlbCBkZSBDZXJ2YW50ZXMgU2FhdmVkcmFcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIFs0XSBcIlwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIFs1XSBcIiAgICAgQ2Fww610dWxvIHByaW1lcm9cIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiBbNl0gXCJcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiBbN10gXCIgICAgIFF1ZSB0cmF0YSBkZSBsYSBjb25kaWNpw7NuIHkgZWplcmNpY2lvIGRlbCBmYW1vc28gaGlkYWxnbyBELlwiXG4gWzhdIFwiUXVpam90ZSBkZSBsYSBcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gWzldIFwiICAgICBNYW5jaGFcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5bMTBdIFwiXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4ifQ== -->
+<pre><code> [1] &quot;EL INGENIOSO HIDALGO DON QUIJOTE DE LA MANCHA&quot;                   
+ [2] &quot;&quot;                                                                
+ [3] &quot;Miguel de Cervantes Saavedra&quot;                                    
+ [4] &quot;&quot;                                                                
+ [5] &quot;     Capítulo primero&quot;                                           
+ [6] &quot;&quot;                                                                
+ [7] &quot;     Que trata de la condición y ejercicio del famoso hidalgo D.&quot;
+ [8] &quot;Quijote de la &quot;                                                  
+ [9] &quot;     Mancha&quot;                                                     
+[10] &quot;&quot;                                                                </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVpam90ZV9maWxlIDwtIHJlYWRfZmlsZSh0ZXh0X2ZpbGUpIFxuc3RyKHF1aWpvdGVfZmlsZSlcbmBgYCJ9 -->
+<pre class="r"><code>quijote_file &lt;- read_file(text_file) 
+str(quijote_file)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIGNociBcIkVMIElOR0VOSU9TTyBISURBTEdPIERPTiBRVUlKT1RFIERFIExBIE1BTkNIQVxcclxcblxcclxcbk1pZ3VlbCBkZSBDZXJ2YW50ZXMgU2FhdmVkcmFcXHJcXG5cXHJcXG4gICAgIENhcMOtdHVsbyBwcmltZXJvXFxcInwgX190cnVuY2F0ZWRfX1xuIn0= -->
+<pre><code> chr &quot;EL INGENIOSO HIDALGO DON QUIJOTE DE LA MANCHA\r\n\r\nMiguel de Cervantes Saavedra\r\n\r\n     Capítulo primero\&quot;| __truncated__</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3Vic3RyKHF1aWpvdGVfZmlsZSwwLDE1MClcbmBgYCJ9 -->
+<pre class="r"><code>substr(quijote_file,0,150)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiRUwgSU5HRU5JT1NPIEhJREFMR08gRE9OIFFVSUpPVEUgREUgTEEgTUFOQ0hBXFxyXFxuXFxyXFxuTWlndWVsIGRlIENlcnZhbnRlcyBTYWF2ZWRyYVxcclxcblxcclxcbiAgICAgQ2Fww610dWxvIHByaW1lcm9cXHJcXG5cXHJcXG4gICAgIFF1ZSB0cmF0YSBkZSBsYSBjb25kaWNpw7NuIHkgZWplcmNpY2lvIGRcIlxuIn0= -->
+<pre><code>[1] &quot;EL INGENIOSO HIDALGO DON QUIJOTE DE LA MANCHA\r\n\r\nMiguel de Cervantes Saavedra\r\n\r\n     Capítulo primero\r\n\r\n     Que trata de la condición y ejercicio d&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVhZF9saW5lcyh0ZXh0X2ZpbGUsc2tpcCA9IDEwLG5fbWF4ID0gMjApXG5gYGAifQ== -->
+<pre class="r"><code>read_lines(text_file,skip = 10,n_max = 20)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIiAgICAgRW4gdW4gbHVnYXIgZGUgbGEgTWFuY2hhLCBkZSBjdXlvIG5vbWJyZSBubyBxdWllcm9cIiAgICAgICAgIFxuIFsyXSBcImFjb3JkYXJtZSwgbm8gaGEgbXVjaG8gdGllbXBvIHF1ZSB2aXbDrWEgdW4gaGlkYWxnbyBkZSBsb3MgZGVcIiAgICBcbiBbM10gXCJsYW56YSBlbiBhc3RpbGxlcm8sIGFkYXJnYSBhbnRpZ3VhLCByb2PDrW4gZmxhY28geSBnYWxnb1wiICAgICAgICAgXG4gWzRdIFwiY29ycmVkb3IuIFVuYSBvbGxhIGRlIGFsZ28gbcOhcyB2YWNhIHF1ZSBjYXJuZXJvLCBzYWxwaWPDs24gbGFzXCIgICBcbiBbNV0gXCJtw6FzIG5vY2hlcywgZHVlbG9zIHkgcXVlYnJhbnRvcyBsb3Mgc8OhYmFkb3MsIGxlbnRlamFzIGxvc1wiICAgICAgIFxuIFs2XSBcInZpZXJuZXMsIGFsZ8O6biBwYWxvbWlubyBkZSBhw7FhZGlkdXJhIGxvcyBkb21pbmdvcywgY29uc3Vtw61hbiBsYXNcIlxuIFs3XSBcInRyZXMgcGFydGVzIGRlIHN1IGhhY2llbmRhLiBFbCByZXN0byBkZWxsYSBjb25jbHXDrWFuIHNheW8gZGVcIiAgICBcbiBbOF0gXCJ2ZWxhcnRlLCBjYWx6YXMgZGUgdmVsbHVkbyBwYXJhIGxhcyBmaWVzdGFzIGNvbiBzdXMgcGFudHVmbG9zIGRlXCJcbiBbOV0gXCJsbyBtaXNtbywgbG9zIGTDrWFzIGRlIGVudHJlIHNlbWFuYSBzZSBob25yYWJhIGNvbiBzdSB2ZWxsb3JpIGRlXCIgXG5bMTBdIFwibG8gbcOhcyBmaW5vLiBUZW7DrWEgZW4gc3UgY2FzYSB1bmEgYW1hIHF1ZSBwYXNhYmEgZGUgbG9zXCIgICAgICAgICBcblsxMV0gXCJjdWFyZW50YSwgeSB1bmEgc29icmluYSBxdWUgbm8gbGxlZ2FiYSBhIGxvcyB2ZWludGUsIHkgdW4gbW96b1wiICBcblsxMl0gXCJkZSBjYW1wbyB5IHBsYXphLCBxdWUgYXPDrSBlbnNpbGxhYmEgZWwgcm9jw61uIGNvbW8gdG9tYWJhIGxhXCIgICAgIFxuWzEzXSBcInBvZGFkZXJhLiBGcmlzYWJhIGxhIGVkYWQgZGUgbnVlc3RybyBoaWRhbGdvIGNvbiBsb3MgY2luY3VlbnRhXCIgIFxuWzE0XSBcImHDsW9zLCBlcmEgZGUgY29tcGxleGnDs24gcmVjaWEsIHNlY28gZGUgY2FybmVzLCBlbmp1dG8gZGUgcm9zdHJvO1wiXG5bMTVdIFwiZ3JhbiBtYWRydWdhZG9yIHkgYW1pZ28gZGUgbGEgY2F6YS4gUXVpZXJlbiBkZWNpciBxdWUgdGVuw61hIGVsXCIgIFxuWzE2XSBcInNvYnJlbm9tYnJlIGRlIFF1aWphZGEgbyBRdWVzYWRhIChxdWUgZW4gZXN0byBoYXkgYWxndW5hXCIgICAgICAgIFxuWzE3XSBcImRpZmVyZW5jaWEgZW4gbG9zIGF1dG9yZXMgcXVlIGRlc3RlIGNhc28gZXNjcmliZW4pLCBhdW5xdWUgcG9yXCIgIFxuWzE4XSBcImNvbmpldHVyYXMgdmVyb3PDrW1pbGVzIHNlIGRlamEgZW50ZW5kZXIgcXVlIHNlIGxsYW1hIFF1aWphbmE7XCIgICBcblsxOV0gXCJwZXJvIGVzdG8gaW1wb3J0YSBwb2NvIGEgbnVlc3RybyBjdWVudG87IGJhc3RhIHF1ZSBlbiBsYVwiICAgICAgICBcblsyMF0gXCJuYXJyYWNpw7NuIGTDqWwgbm8gc2Ugc2FsZ2EgdW4gcHVudG8gZGUgbGEgdmVyZGFkLlwiICAgICAgICAgICAgICAgIFxuIn0= -->
+<pre><code> [1] &quot;     En un lugar de la Mancha, de cuyo nombre no quiero&quot;         
+ [2] &quot;acordarme, no ha mucho tiempo que vivía un hidalgo de los de&quot;    
+ [3] &quot;lanza en astillero, adarga antigua, rocín flaco y galgo&quot;         
+ [4] &quot;corredor. Una olla de algo más vaca que carnero, salpicón las&quot;   
+ [5] &quot;más noches, duelos y quebrantos los sábados, lentejas los&quot;       
+ [6] &quot;viernes, algún palomino de añadidura los domingos, consumían las&quot;
+ [7] &quot;tres partes de su hacienda. El resto della concluían sayo de&quot;    
+ [8] &quot;velarte, calzas de velludo para las fiestas con sus pantuflos de&quot;
+ [9] &quot;lo mismo, los días de entre semana se honraba con su vellori de&quot; 
+[10] &quot;lo más fino. Tenía en su casa una ama que pasaba de los&quot;         
+[11] &quot;cuarenta, y una sobrina que no llegaba a los veinte, y un mozo&quot;  
+[12] &quot;de campo y plaza, que así ensillaba el rocín como tomaba la&quot;     
+[13] &quot;podadera. Frisaba la edad de nuestro hidalgo con los cincuenta&quot;  
+[14] &quot;años, era de complexión recia, seco de carnes, enjuto de rostro;&quot;
+[15] &quot;gran madrugador y amigo de la caza. Quieren decir que tenía el&quot;  
+[16] &quot;sobrenombre de Quijada o Quesada (que en esto hay alguna&quot;        
+[17] &quot;diferencia en los autores que deste caso escriben), aunque por&quot;  
+[18] &quot;conjeturas verosímiles se deja entender que se llama Quijana;&quot;   
+[19] &quot;pero esto importa poco a nuestro cuento; basta que en la&quot;        
+[20] &quot;narración dél no se salga un punto de la verdad.&quot;                </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -231,18 +308,47 @@ readLines(text_file,n=10,skipNul = TRUE)</code></pre>
 <h2>archivo csv</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaG91cjwtcmVhZF9jc3YoXCIuL2RhdGEvaG91ci5jc3ZcIilcbmBgYCJ9 -->
-<pre class="r"><code>hour&lt;-read_csv(&quot;./data/hour.csv&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaG91cjwtcmVhZF9jc3YoXCIuLi9kYXRhL2hvdXIuY3N2XCIpXG5gYGAifQ== -->
+<pre class="r"><code>hour&lt;-read_csv(&quot;../data/hour.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcmVhZF9jc3YoXCIuL2RhdGEvaG91ci5jc3ZcIikgOiBjb3VsZCBub3QgZmluZCBmdW5jdGlvbiBcInJlYWRfY3N2XCJcbiJ9 -->
-<pre><code>Error in read_csv(&quot;./data/hour.csv&quot;) : could not find function &quot;read_csv&quot;</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBpbnN0YW50ID0gY29sX2ludGVnZXIoKSxcbiAgZHRlZGF5ID0gY29sX2RhdGUoZm9ybWF0ID0gXCJcIiksXG4gIHNlYXNvbiA9IGNvbF9pbnRlZ2VyKCksXG4gIHlyID0gY29sX2ludGVnZXIoKSxcbiAgbW50aCA9IGNvbF9pbnRlZ2VyKCksXG4gIGhyID0gY29sX2ludGVnZXIoKSxcbiAgaG9saWRheSA9IGNvbF9pbnRlZ2VyKCksXG4gIHdlZWtkYXkgPSBjb2xfaW50ZWdlcigpLFxuICB3b3JraW5nZGF5ID0gY29sX2ludGVnZXIoKSxcbiAgd2VhdGhlcnNpdCA9IGNvbF9pbnRlZ2VyKCksXG4gIHRlbXAgPSBjb2xfZG91YmxlKCksXG4gIGF0ZW1wID0gY29sX2RvdWJsZSgpLFxuICBodW0gPSBjb2xfZG91YmxlKCksXG4gIHdpbmRzcGVlZCA9IGNvbF9kb3VibGUoKSxcbiAgY2FzdWFsID0gY29sX2ludGVnZXIoKSxcbiAgcmVnaXN0ZXJlZCA9IGNvbF9pbnRlZ2VyKCksXG4gIGNudCA9IGNvbF9pbnRlZ2VyKClcbilcbiJ9 -->
+<pre><code>Parsed with column specification:
+cols(
+  instant = col_integer(),
+  dteday = col_date(format = &quot;&quot;),
+  season = col_integer(),
+  yr = col_integer(),
+  mnth = col_integer(),
+  hr = col_integer(),
+  holiday = col_integer(),
+  weekday = col_integer(),
+  workingday = col_integer(),
+  weathersit = col_integer(),
+  temp = col_double(),
+  atemp = col_double(),
+  hum = col_double(),
+  windspeed = col_double(),
+  casual = col_integer(),
+  registered = col_integer(),
+  cnt = col_integer()
+)</code></pre>
 <!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChob3VyKVxuYGBgIn0= -->
+<pre class="r"><code>head(hour)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MTcsIm5yb3ciOjZ9LCJyZGYiOiJINHNJQUFBQUFBQUFCcVZVUDQvVE1CUTNjWnJTU0hkcWRTTVNmN1pqYUNYdUM0VGh2c0F4M2NCaUV0TllUZTNLZGhWT1lyZ0JSc1RNVFh3SEJLb1lHV0FCQk14OEFBNFlHR0NBNGNwems1ZW1vWWNPWWVubFovK2VYL3plN3ptNXNidS9FKzZIaEJDUFVKOFNqOExVOStCeGp2aWs0L0FPSVhRTEpqMndEYkJnNFhRQjRIQzd3Vm9GVHpjZFhuOFRIUUtTczJMandGYWNNV05nMHEyUi9pNnpIUENra2NRNlEvOXA0MS9pMXhWNjF2ZWZaditUbjh0bElYTDBkcmIzNWY3RldmUjYrOGVMaHpldlZvaDhBNnU0RDluM1MxZjZlZlRlZkg0eWZQeXpRdVFSMzkyOTkvVGp5NmlLTzNadjJmc2FIVDl5NDZqQ1QwWFNUY1M0djlTNU1xSm4zNElIcytldmF2VTd6YytUUW5PNlJoK0hsOEV1Z0lYa3ovNTF3YmJMUFJ0THY3dHMzcHlzM3E4d1laWU5ibXMyNXMzcktJSEQ2OWdyeWJhUXhqSnB5MldRV0o2d0Exd1p6b3lTNWNvNzBIaUh4OUtteUtiSXRsT1ZpV1Z3TytkOHRGeUd1ZElqSVlkMWhqT2JjbTBFbnU1YlBwNWd0cXkyb09sMFhFNDd1WkNKbVhDZVlKSXhNMU9XNFVzMUh3cGp1YTc4TklicVZwWG9hSlVQVUEwbnFIY0lqL2w4L29zc1BzeVZ6VzAxc1VKSjJPcHQxZnBSL1ZWMHJXbWs0ZXhPcFRzbTZjZnBWSTc2MTNZYWU3R1pRVzNlSzg2bjJOZ0E2K1J5S0NSSGVialdDcFZ2WmV3V1J3VTJvYmhGYllPSkZsVmpRMkROd0NxN1ZDcFdHVExGNytqa041NysxUHBFQlFBQSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["instant"],"name":[1],"type":["int"],"align":["right"]},{"label":["dteday"],"name":[2],"type":["date"],"align":["right"]},{"label":["season"],"name":[3],"type":["int"],"align":["right"]},{"label":["yr"],"name":[4],"type":["int"],"align":["right"]},{"label":["mnth"],"name":[5],"type":["int"],"align":["right"]},{"label":["hr"],"name":[6],"type":["int"],"align":["right"]},{"label":["holiday"],"name":[7],"type":["int"],"align":["right"]},{"label":["weekday"],"name":[8],"type":["int"],"align":["right"]},{"label":["workingday"],"name":[9],"type":["int"],"align":["right"]},{"label":["weathersit"],"name":[10],"type":["int"],"align":["right"]},{"label":["temp"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["atemp"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["hum"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["windspeed"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["casual"],"name":[15],"type":["int"],"align":["right"]},{"label":["registered"],"name":[16],"type":["int"],"align":["right"]},{"label":["cnt"],"name":[17],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"2011-01-01","3":"1","4":"0","5":"1","6":"0","7":"0","8":"6","9":"0","10":"1","11":"0.24","12":"0.2879","13":"0.81","14":"0.0000","15":"3","16":"13","17":"16"},{"1":"2","2":"2011-01-01","3":"1","4":"0","5":"1","6":"1","7":"0","8":"6","9":"0","10":"1","11":"0.22","12":"0.2727","13":"0.80","14":"0.0000","15":"8","16":"32","17":"40"},{"1":"3","2":"2011-01-01","3":"1","4":"0","5":"1","6":"2","7":"0","8":"6","9":"0","10":"1","11":"0.22","12":"0.2727","13":"0.80","14":"0.0000","15":"5","16":"27","17":"32"},{"1":"4","2":"2011-01-01","3":"1","4":"0","5":"1","6":"3","7":"0","8":"6","9":"0","10":"1","11":"0.24","12":"0.2879","13":"0.75","14":"0.0000","15":"3","16":"10","17":"13"},{"1":"5","2":"2011-01-01","3":"1","4":"0","5":"1","6":"4","7":"0","8":"6","9":"0","10":"1","11":"0.24","12":"0.2879","13":"0.75","14":"0.0000","15":"0","16":"1","17":"1"},{"1":"6","2":"2011-01-01","3":"1","4":"0","5":"1","6":"5","7":"0","8":"6","9":"0","10":"2","11":"0.24","12":"0.2576","13":"0.75","14":"0.0896","15":"0","16":"1","17":"1"}],"options":{"columns":{"min":{},"max":[10],"total":[17]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlNlbWFuYSAxIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KYGBge3IgInNldHVwIiwgaW5jbHVkZT1GQUxTRX0NCnJlcXVpcmUoa25pdHIpDQpvcHRzX2tuaXQkc2V0KHJvb3QuZGlyID0gIn4vRG9jdW1lbnRzL2RzX21pbm9yL2RhdGEtd3JhbmdsaW5nIikNCmBgYA0KDQoNCg0KIyMgT2JqZXRpdm9zDQoNCjEuIENhcmdhciBBcmNoaXZvcyBkZSBUZXh0byBhIFIgKFB5dGhvbikuDQoyLiBFbnRlbmRlciBsb3MgZGlmZXJlbnRlcyBmb3JtYXRvcyBkZSBhcmNoaXZvcyBkZSB0ZXh0by4NCjMuIFVzYXIgbGFzIGRpZmVyZW50ZXMgb3BjaW5lcyBkZSBsYXMgZnVuY2lvbmVzIHBhcmEgY2FyZ2FyIGFyY2hpdm9zIGRlIHRleHRvLg0KDQojIyBBcmNoaXZvcyBkZSBUZXh0bw0KDQojIyMgRnVuY2nDs24gcmVhZGxpbmVzDQoNCmBgYHtyfQ0KdGV4dF9maWxlIDwtICcvZGF0YS9xdWlqb3RlLnR4dCcNCnJlYWRMaW5lcyh0ZXh0X2ZpbGUsbj0xMCxza2lwTnVsID0gVFJVRSkNCmBgYA0KDQoNCmBgYHtyfQ0KcXVpam90ZSA8LSByZWFkTGluZXModGV4dF9maWxlLG49MTAsc2tpcE51bCA9IFRSVUUpDQpzdHIocXVpam90ZSkNCmBgYA0KDQoNCg0KDQojIyMgRnVuY2nDs24gcmVhZF9saW5lcyB5IHJlYWRfZmlsZQ0KYGBge3J9DQpsaWJyYXJ5KHJlYWRyKQ0KcXVpam90ZV9saW5lcyA8LSByZWFkX2xpbmVzKHRleHRfZmlsZSkNCnN0cihxdWlqb3RlX2xpbmVzKQ0KYGBgDQoNCmBgYHtyfQ0KcXVpam90ZV9saW5lc1sxOjEwXQ0KYGBgDQoNCg0KYGBge3J9DQpxdWlqb3RlX2ZpbGUgPC0gcmVhZF9maWxlKHRleHRfZmlsZSkgDQpzdHIocXVpam90ZV9maWxlKQ0KYGBgDQoNCmBgYHtyfQ0Kc3Vic3RyKHF1aWpvdGVfZmlsZSwwLDE1MCkNCmBgYA0KDQoNCmBgYHtyfQ0KcmVhZF9saW5lcyh0ZXh0X2ZpbGUsc2tpcCA9IDEwLG5fbWF4ID0gMjApDQpgYGANCg0KIyMgYXJjaGl2byBjc3YgDQoNCg0KYGBge3J9DQpob3VyPC1yZWFkX2NzdigiLi9kYXRhL2hvdXIuY3N2IikNCmhlYWQoaG91cikNCmBgYA0KDQoNCg0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlNlbWFuYSAxIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KYGBge3IgInNldHVwIiwgaW5jbHVkZT1GQUxTRX0NCnJlcXVpcmUoa25pdHIpDQpvcHRzX2tuaXQkc2V0KHJvb3QuZGlyID0gIn4vRG9jdW1lbnRzL2RzX21pbm9yL2RhdGEtd3JhbmdsaW5nIikNCmBgYA0KDQoNCg0KIyMgT2JqZXRpdm9zDQoNCjEuIENhcmdhciBBcmNoaXZvcyBkZSBUZXh0byBhIFIgKFB5dGhvbikuDQoyLiBFbnRlbmRlciBsb3MgZGlmZXJlbnRlcyBmb3JtYXRvcyBkZSBhcmNoaXZvcyBkZSB0ZXh0by4NCjMuIFVzYXIgbGFzIGRpZmVyZW50ZXMgb3BjaW9uZXMgZGUgbGFzIGZ1bmNpb25lcyBwYXJhIGNhcmdhciBhcmNoaXZvcyBkZSB0ZXh0by4NCg0KIyMgQXJjaGl2b3MgZGUgVGV4dG8NCg0KIyMjIEZ1bmNpw7NuIHJlYWRsaW5lcw0KDQpgYGB7cn0NCnRleHRfZmlsZSA8LSAnLi4vZGF0YS9xdWlqb3RlLnR4dCcNCnJlYWRMaW5lcyh0ZXh0X2ZpbGUsbj0xMCxza2lwTnVsID0gVFJVRSkNCmBgYA0KDQoNCmBgYHtyfQ0KcXVpam90ZSA8LSByZWFkTGluZXModGV4dF9maWxlLG49MTAsc2tpcE51bCA9IFRSVUUpDQpzdHIocXVpam90ZSkNCmBgYA0KDQoNCg0KDQojIyMgRnVuY2nDs24gcmVhZF9saW5lcyB5IHJlYWRfZmlsZQ0KYGBge3J9DQpsaWJyYXJ5KHJlYWRyKQ0KcXVpam90ZV9saW5lcyA8LSByZWFkX2xpbmVzKHRleHRfZmlsZSkNCnN0cihxdWlqb3RlX2xpbmVzKQ0KYGBgDQoNCmBgYHtyfQ0KcXVpam90ZV9saW5lc1sxOjEwXQ0KYGBgDQoNCg0KYGBge3J9DQpxdWlqb3RlX2ZpbGUgPC0gcmVhZF9maWxlKHRleHRfZmlsZSkgDQpzdHIocXVpam90ZV9maWxlKQ0KYGBgDQoNCmBgYHtyfQ0Kc3Vic3RyKHF1aWpvdGVfZmlsZSwwLDE1MCkNCmBgYA0KDQoNCmBgYHtyfQ0KcmVhZF9saW5lcyh0ZXh0X2ZpbGUsc2tpcCA9IDEwLG5fbWF4ID0gMjApDQpgYGANCg0KIyMgYXJjaGl2byBjc3YgDQoNCg0KYGBge3J9DQpob3VyPC1yZWFkX2NzdigiLi4vZGF0YS9ob3VyLmNzdiIpDQpoZWFkKGhvdXIpDQpgYGANCg0KDQoNCg0K</div>
 
 
 
