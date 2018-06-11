@@ -1,0 +1,51 @@
+---
+title: " Lecture: Introduction to Data Transformation"
+author: "Tepi"
+date: "June 11, 2018"
+output: html_document
+---
+
+ref: http://r4ds.had.co.nz/transform.html 
+
+## Objetivos
+
+1. Introducción al paquete ` dplyr`
+
+
+
+
+```{r, cache=TRUE, echo=TRUE}
+library(dplyr)
+library(nycflights13)
+
+```
+
+## nycflights13
+Contiene los 336,776 vuelos que salieron de Nueva York en el año 2013.
+Referencia: https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0
+
+
+
+```{r,cache=TRUE, echo=TRUE}
+flights
+
+```
+
+
+## `filter()`
+
+```{r,cache=TRUE, echo=TRUE}
+df <- filter(flights, month==10, day==27)
+df
+```
+
+
+
+## Including Plots
+
+
+```{r}
+
+```
+
+
