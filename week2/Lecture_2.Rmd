@@ -31,7 +31,7 @@ head(df)
 ```{r}
 data<-read.table(file="http://www.sthda.com/upload/decathlon.txt") 
 head(data)
-str-(data)
+str(data)
 ```
  La primera fila del data set contiene el nombre de cada una de las columnas.
  La estructura del data set muestra un error ya que cada columna se encuentra en formato de factor,
