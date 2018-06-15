@@ -1,0 +1,86 @@
+---
+title: "Getting Data From an Api"
+output: html_notebook
+---
+
+## Objetivo
+
+1. Aprender a utilizar algunas funciones de las siguientes librerias
+    i) `httr`
+    ii) `jsonlite`
+    iii) `purrr`
+2. Hacer un **POST** y un **GET** request a un api.
+3. Conectarse al API de spotify
+4. Manejar listas
+
+
+## Spotify api
+
+![](img/spotify_logo.png)
+
+Spotify es un servicio de música, podcasts y vídeos digitales en streaming que te da acceso a millones de canciones y otros contenidos de artistas de todo el mundo.
+
+### Crear una cuenta 
+
+Ingresar a https://developer.spotify.com/ si o se tiene cuenta crear una.
+
+### Crear una nueva app
+
+#### Step 0
+![](img/new_app.png)
+
+#### Step 1
+![](img/step1.png)
+
+#### Step 2
+
+![](img/step2.png)
+
+#### App ready
+
+![](img/app_ready.png)
+
+#### Get Client ID and Client Secret
+
+![](img/client_info.png)
+
+
+## Obtener data del api
+
+https://developer.spotify.com/documentation/web-api/reference/
+
+![](img/api_reference.png)
+
+![](img/artist.png)
+
+![](img/ex_api_call.png)
+
+La clave esta en poder tener un codigo de autenticacion, sin este codigo no podemos hace nuestras consultas al api.
+Para probarlos hagamos click en el siguietne boton
+
+![](img/try.png)
+
+Nos lleva a esta pantalla
+
+![](img/get_token.png)
+
+Clicks en ese boton y nos genera nuestro token de autorizacion.
+
+![](img/gen_token.png)
+
+Para armar el request usaremos el programa PostMan
+
+![](img/postman1.png)
+
+Ejercicio: Armemos un request con postman para hacer un search.
+
+
+paso 1: https://developer.spotify.com/documentation/web-api/reference/search/search/
+paso 2: Hacemos el llamado desde postman
+
+
+![](img/search_call.png)
+
+
+
+
