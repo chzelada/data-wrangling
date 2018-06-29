@@ -1,0 +1,187 @@
+---
+title: "Conexión a MySQL desde Rstudio"
+author: "Tepi"
+date: "June 25, 2018"
+output: html_document
+---
+
+
+# Objetivos
+
+1. Instalar RMySQL
+2. Conectar a base de datos de MySQL.
+3. Importar Query de MySQL a data frame en R.
+4. Información general de RMySQL.
+4. Exportar data frame de R a base de datos de MySQL.
+
+
+
+
+```{r, echo=TRUE,cache=FALSE}
+#install.packages("RMySQL")
+library("RMySQL")
+```
+
+## Conectar a Base de Datos
+
+Podemos establecer una conexión a una base de datos de MySQL usando la función ```dbConnect()``` . Para esto necesitamos los parámetros que usaríamos en alguna IDE de SQL regular:
+
+1. El nombre de la conexión o servidor al que queremos accesar.
+2. El nombre de la base de datos.
+3. Usuario
+4. Contraseña de la base de datos.
+
+```{r, echo=TRUE}
+##parametros para conexion 
+connection_name <- "dstrackdb.cwvcmlr71hlu.us-east-1.rds.amazonaws.com"
+db_name <- "data_wrangling"
+user <- "dstrack"
+password <- "4es-27c-CdV-TEe"
+drv = dbDriver("MySQL")
+
+mydb = dbConnect(drv,host=connection_name,dbname=db_name,user=user,pass=password)
+
+summary(mydb)
+dbListTables(mydb)
+```
+
+
+## Listar tablas de base de datos
+
+Este sería el equivalente a un ``` show tables;``` en MySQL
+
+```{r}
+dbListTables(mydb)
+
+```
+
+
+
+
+## Listar campos de tabla
+
+La función ```dbListFields()``` devuelve los nombres de las columnas de la tabla de MySQL.
+La función ```dbColumnInfo()``` presenta a mayor detalle las características de las columnas de la tabla. La función equivalente en MySQL sería ```describe heroes_information;```
+
+```{r}
+
+mydb = dbConnect(drv,host=connection_name,dbname=db_name,user=user,pass=password)
+dbListFields(mydb,"heroes_information")
+dbColumnInfo(mydb,"heroes_information")
+
+```
+
+# Querying Data
+
+Realizar queries desde una interfaz de MySQL sea probablemente más fácil y conveniente. Sin embargo, una de las posibles desventajas es exportar esa data para un análisis más profundo a otro programa. Es por eso que a veces resulta mejor realizar las consultas directamente desde R para que la preparación de data no sea tan dolorosa. 
+
+Existen varios métodos para realizar esto:
+
+### ```dbReadTable()```
+
+Esta función extrae una tabla completa de la base de datos. No es recomendable de usar si la tabla es muy grande. En nuestro caso, la tabla contiene únicamente 734 filas.
+
+Otra ventaja es que utilizar esta función nos devuelve la tabla en formato de dataframe.
+
+```{r}
+hero<-dbReadTable(mydb,"heroes_information")
+head(hero)
+str(hero)
+```
+
+### ```dbGetQuery()```
+
+Otro método es realizar un query directamente a la base datos, como si lo hiciéramos desde MySQL. 
+
+```{r}
+
+hero<-dbGetQuery(mydb,"SELECT * FROM heroes_information;")
+head(hero)
+str(hero)
+```
+
+Una buena práctica es asignarle a alguna variable el Query:
+
+```{r}
+Query<-"SELECT * FROM heroes_information;"
+hero<-dbGetQuery(mydb,Query)
+head(hero)
+```
+
+### ```dbSendQuery()``` y ```dbFetch()```
+
+Algo que puede suceder es que el query sea tan grande, que extraerlo resulte problemático. Es en estos casos donde extraer la data por partes sea una buena aproximación.
+
+```{r}
+Query <-dbSendQuery(mydb,"SELECT * FROM heroes_information;")
+hero <-dbFetch(Query,n=10)
+hero
+```
+El query es enviado y su resultado es luego extraido con dbFetch. Esto nos permite decidir la cantidad de resultados que queremos para hacer pruebas de cuanto tiempo se puede tardar el query o los recursos que consumira.
+
+Si quisieramos tener informacion del query enviado podemos utilizar ```dbGetInfo()``` :
+
+
+```{r}
+
+dbGetInfo(Query)
+
+```
+
+
+Cuantas columnas devolverá nuestro Query :
+
+```{r}
+
+dbGetRowCount(Query)
+```
+
+Limpiar resultados:
+```{r}
+
+dbClearResult(Query)
+```
+
+## Exportar Tablas
+
+La función ```dbWriteTable()``` permite exportar desde R una tabla a una base de datos de MySQL. Podemos:
+1. Crear tablas nuevas.
+2. Sobreescribir una tabla existente.
+3. Agregarle data a una tabla existente.
+
+### Crear una Tabla nueva
+
+```{r, cache=TRUE}
+x<-1:10
+y <-letters[1:10]
+test <-data.frame(x,y,stringsAsFactors = FALSE)
+
+dbWriteTable(mydb,"test",test)
+
+dbListTables(mydb)
+
+```
+
+Sobreescribir la tabla nueva
+
+```{r}
+x<-sample(100,10)
+y <-letters[11:20]
+test2 <-data.frame(x,y,stringsAsFactors = FALSE)
+
+dbWriteTable(mydb,"test",test2, overwrite=TRUE)
+
+
+```
+
+Agregarle data a una tabla existente
+
+```{r}
+x<-sample(100,10)
+y <-letters[6:15]
+test3 <-data.frame(x,y,stringsAsFactors = FALSE)
+
+dbWriteTable(mydb,"test",test,test3,append=TRUE)
+
+
+```

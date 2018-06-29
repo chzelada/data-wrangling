@@ -1,8 +1,11 @@
 ---
 title: "Semana 2"
-author: "Tepi"
+author: "Juan Carlos Giron"
 date: "June 5, 2018"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -75,10 +78,6 @@ data["CLAY","Shot.put"]
 
 ## Ejercicio: 
 
-El data set presenta nombres duplicados en mayúscula y minúscula.
-Crear un formato de nombres en el cual cada registro se encuentre en mayúsculas y no se presenten duplicados.
-
-Nota: No pueden existir nombres de fila duplicados. 
 
 
 
