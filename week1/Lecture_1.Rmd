@@ -18,7 +18,7 @@ opts_knit$set(root.dir = "~/Documents/ds_minor/data-wrangling")
 
 ## Archivos de Texto
 
-### Función readlines
+### Funcion readlines
 
 ```{r}
 text_file <- '../data/quijote.txt'
