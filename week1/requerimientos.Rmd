@@ -1,0 +1,24 @@
+---
+title: "Requerimientos previos a la clase"
+author: "Tepi y Jose"
+date: "July 7, 2018"
+output: 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Requerimientos Previos a la Clase
+
+* Tener instalado Rstudio version 3.4.x https://www.rstudio.com/products/rstudio/download/
+* IDE de MySQL: Microsoft SQL Server - MySQL Workbench 6.3, otros.
+* Postman para conexión a APIs. https://www.getpostman.com/apps
+
+
+## Cosas que faltan para hacer
+
+* Actualizar el orden del programa de la clase.
+* Clases:
+
+* Laboratorios
