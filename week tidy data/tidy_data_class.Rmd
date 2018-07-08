@@ -1,0 +1,93 @@
+---
+title: "Tidy Data"
+author: "Tepi"
+date: "July 7, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tidy Data
+
+Basado en el trabajo realizado por Hadley Wickham.
+
+## Objetivos 
+
+1. Familiarizarse con el concepto de *Tidy Data*
+2. Aprender a utilizar la funcion ```melt```.
+
+
+
+
+```{r,echo=TRUE,}
+library(tidyr)
+library(reshape2)
+```
+
+
+### Melt and Gather
+
+Ambas funciones hacen lo mismo, pero son de paquetes diferentes.
+
+if melt() does not receive any id.variables specification, then it will use the factor or character columns as id variables. gather() requires the columns that needs to be treated as ids, all the other columns are going to be used as key-value pairs.
+
+```{r}
+
+df <- data.frame(row = LETTERS[1:3], a = 1:3, b = 4:6, c = 7:9)
+df
+
+```
+
+```melt```de la libreria *reshape2*:
+
+```{r}
+dfm <- melt(df, id = "row")
+dfm
+```
+
+```gather```de la libreria *tidyr*:
+```{r}
+dfg <-gather(df,key="variable", value="value", a:c)
+dfg
+```
+
+La principal diferencia entre las dos es que, si a *melt* no le pasas una variable de identificacion, va a asumir que **todas** las variables con caracteres o texto van a ser las variables de id. 
+
+Por su lado, *gather* si necesita que se le especifique el key-pair para juntar las variables. En este caso, las variables a b c seran la columna *variable* y sus valores correspondientes se iran a la columna *value*.
+
+### Ejemplo 2
+
+Exportemos el archivo llamado *raw.csv* 
+
+Este dataset es de la World Health Organization y cuenta los casos de Tuberculosis en varios paises. m es masculino, f es femenino y los numeros son el rango de edad en el que se encuentra la persona.
+
+
+
+```{r}
+raw<-read.csv("raw.csv")
+head(raw)
+
+```
+
+¿Cómo haríamos que esto esté en tidy?
+
+```{r}
+clean <- melt(raw, id = c("country", "year"), na.rm = TRUE)
+names(clean)[3] <- "column"
+names(clean)[4] <- "cases"
+
+clean <- arrange(clean, country, column, year)
+```
+```{r}
+clean_g<- gather(raw, column, cases, -country,-year, na.rm = TRUE) 
+                 
+names(clean_g)[3] <- "column"
+names(clean_g)[4] <- "cases"
+dfg <-gather(df,key="variable", value="value", a:c)
+clean <- arrange(clean, country, column, year)
+```
+
+El codigo de clean_g dice: de raw, juntame todas las variables menos country y year, ponelas en la columna que se llama columna, y sus valores en la columna que se llama cases.
+
