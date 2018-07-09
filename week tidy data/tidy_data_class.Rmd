@@ -24,6 +24,8 @@ Basado en el trabajo realizado por Hadley Wickham.
 ```{r,echo=TRUE,}
 library(tidyr)
 library(reshape2)
+library(dplyr)
+library(stringr)
 ```
 
 
@@ -73,21 +75,55 @@ head(raw)
 
 ¿Cómo haríamos que esto esté en tidy?
 
-```{r}
+```{r, cache=TRUE}
 clean <- melt(raw, id = c("country", "year"), na.rm = TRUE)
 names(clean)[3] <- "column"
 names(clean)[4] <- "cases"
 
 clean <- arrange(clean, country, column, year)
+head(clean)
+
 ```
+
+
 ```{r}
 clean_g<- gather(raw, column, cases, -country,-year, na.rm = TRUE) 
                  
-names(clean_g)[3] <- "column"
-names(clean_g)[4] <- "cases"
-dfg <-gather(df,key="variable", value="value", a:c)
-clean <- arrange(clean, country, column, year)
 ```
 
 El codigo de clean_g dice: de raw, juntame todas las variables menos country y year, ponelas en la columna que se llama columna, y sus valores en la columna que se llama cases.
+
+Ya tenemos bastante limpia el data set, pero el rango de edad y el sexo de los sujetos de estudio estan juntos en una columna. Debemos separarlos en columnas distintas donde se tenga el sexo y la edad, cada uno en una variable.
+
+La funcion ```str_sub()``` nos permite extraer caracteres de un vector. en este caso, de la variable column estaremos extrayendo unicamente el primer caracter, ya que sabemos que eso indica el sexo del sujeto.
+
+Luego, creamos una columna llamada age donde extraemos todo el texto despues del primer caracter de la variable columna. luego, lo volveremos un factor con los niveles ingresados a pie. 
+
+
+```{r}
+
+clean$sex <- str_sub(clean$column, start = 1,end = 1)
+
+ages <- c("04" = "0-4", "514" = "5-14", "014" = "0-14", "1524" = "15-24", "2534" = "25-34", "3544" = "35-44", "4554" = "45-54", "5564" = "55-64", "65"= "65+", "u" = NA)
+
+clean$age <- factor(ages[str_sub(clean$column, 2)], levels = ages)
+
+clean <- clean[c("country", "year", "sex", "age", "cases")]
+head(clean)
+
+
+write.csv(religion, file="dirty-religion.csv")
+
+```
+
+Ya con esto, tenemos el data set en formato tidy.
+
+
+## Laboratorio
+
+Trabajar el Rdata llamado "wide_religion.Rda" y tenerlo en formato tidy.
+Trabajar el Rdata lamado "dirty-religion.Rda" y llevarlo a formato tidy.
+
+Ambos deben de quedar en la misma dimensional. 
+
 

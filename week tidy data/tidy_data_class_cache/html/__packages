@@ -1,0 +1,6 @@
+base
+tidyr
+reshape2
+dplyr
+bindrcpp
+stringr
