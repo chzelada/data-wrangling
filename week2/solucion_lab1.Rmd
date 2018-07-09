@@ -1,0 +1,130 @@
+---
+title: "Solucion Lab #1"
+output: html_notebook
+---
+
+```{r "setup", include=FALSE}
+require(knitr)
+opts_knit$set(root.dir = "C:/Users/JR29/Documents/GitHub/data-wrangling/data/01")
+```
+
+
+
+## Objetivos
+
+1. Solución del laboratorio de la unión de tablas en un mismo directorio
+
+## Archivos de Texto
+
+### Cargando librerías
+```{r}
+require(dplyr)
+require(readxl)
+```
+
+### Función `list.files()`
+#### Asignando la lista de archivos de la carpeta a una variable
+```{r}
+files <- list.files(path = "C:/Users/JR29/Documents/GitHub/data-wrangling/data/01")
+files
+```
+
+### Función `read_excel()`
+#### Lectura del primer archivo de Excel de la carpeta `01`
+```{r}
+inv <- read_excel(files[1], #sheet = "sheet1"
+                  col_types = "text")
+str(inv)
+```
+
+### Determinar el tipo de variable por columna
+```{r}
+#inv$COD_VIAJE se queda en texto
+#inv$CLIENTE se queda en texto
+inv$UBICACION <- as.factor(inv$UBICACION)
+inv$CANTIDAD <- as.numeric(inv$CANTIDAD)
+#inv$PILOTO se queda en texto
+inv$Q <- as.numeric(inv$Q)
+inv$CREDITO <- as.factor(inv$CREDITO)
+inv$UNIDAD <- as.factor(inv$UNIDAD)
+str(inv)
+```
+
+### Seleccionando y nombrando columnas importantes
+```{r}
+inv <- inv[,c(1:8)]
+#names(inv) <- c(vector con nombres de columnas)
+```
+
+### Función `substr()`
+#### Agregando columna `MES` y `ANIO`
+```{r}
+inv$MES <- as.factor(substr(files[1],1,2))
+inv$ANIO <- as.factor(substr(files[1],4,7))
+str(inv)
+```
+
+### Ciclo para unión de todos los archivos
+```{r}
+i=2
+while(i<=length(files)){
+  g <- read_excel(files[i]) #sheet = "sheet1"
+  g <- g[,c(1:8)]
+  g$MES <- substr(files[i],1,2)
+  g$ANIO <- substr(files[i],4,7)
+  #names(g) <- c(vector con nombres de columnas)
+  inv <- rbind(inv,g)
+  i=i+1
+}
+str(inv)
+head(inv)
+```
+
+### Resumen de costo por Mes
+```{r}
+inv %>% dplyr::group_by(MES) %>% dplyr::summarise(`Costo Total` = sum(Q))
+```
+
+### Resumen de costo por Ubicacion
+```{r}
+inv %>% dplyr::group_by(UBICACION) %>% dplyr::summarise(`Costo Total` = sum(Q))
+```
+
+### Resumen de costo por Unidad
+```{r}
+inv %>% dplyr::group_by(UNIDAD) %>% dplyr::summarise(`Costo Total` = sum(Q))
+```
+
+
+### Resumen de costo por Mes, Ubicacion y Unidad
+```{r}
+inv %>% dplyr::group_by(MES, UBICACION, UNIDAD) %>% dplyr::summarise(`Costo Total` = sum(Q))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
