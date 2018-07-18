@@ -125,14 +125,14 @@ $(document).ready(function () {
 </div>
 
 
-<div id="tidy-data" class="section level1">
-<h1>Tidy Data</h1>
+<div id="tidy-data-parte-1" class="section level1">
+<h1>Tidy Data Parte 1</h1>
 <p>Basado en el trabajo realizado por Hadley Wickham.</p>
 <div id="objetivos" class="section level2">
 <h2>Objetivos</h2>
 <ol style="list-style-type: decimal">
 <li>Familiarizarse con el concepto de <em>Tidy Data</em></li>
-<li>Aprender a utilizar la funcion <code>melt</code>.</li>
+<li>Aprender a utilizar la funcion <code>melt</code>. y la función <code>gather()</code>.</li>
 </ol>
 <pre class="r"><code>library(tidyr)
 library(reshape2)</code></pre>
@@ -228,7 +228,9 @@ head(clean)</code></pre>
 <pre class="r"><code>clean_g&lt;- gather(raw, column, cases, -country,-year, na.rm = TRUE) </code></pre>
 <p>El codigo de clean_g dice: de raw, juntame todas las variables menos country y year, ponelas en la columna que se llama columna, y sus valores en la columna que se llama cases.</p>
 <p>Ya tenemos bastante limpia el data set, pero el rango de edad y el sexo de los sujetos de estudio estan juntos en una columna. Debemos separarlos en columnas distintas donde se tenga el sexo y la edad, cada uno en una variable.</p>
-<pre class="r"><code>clean$sex &lt;- str_sub(clean$column, 1, 1)
+<p>La funcion <code>str_sub()</code> nos permite extraer caracteres de un vector. en este caso, de la variable column estaremos extrayendo unicamente el primer caracter, ya que sabemos que eso indica el sexo del sujeto.</p>
+<p>Luego, creamos una columna llamada age donde extraemos todo el texto despues del primer caracter de la variable columna. luego, lo volveremos un factor con los niveles ingresados a pie.</p>
+<pre class="r"><code>clean$sex &lt;- str_sub(clean$column, start = 1,end = 1)
 
 ages &lt;- c(&quot;04&quot; = &quot;0-4&quot;, &quot;514&quot; = &quot;5-14&quot;, &quot;014&quot; = &quot;0-14&quot;, &quot;1524&quot; = &quot;15-24&quot;, &quot;2534&quot; = &quot;25-34&quot;, &quot;3544&quot; = &quot;35-44&quot;, &quot;4554&quot; = &quot;45-54&quot;, &quot;5564&quot; = &quot;55-64&quot;, &quot;65&quot;= &quot;65+&quot;, &quot;u&quot; = NA)
 
@@ -243,7 +245,13 @@ head(clean)</code></pre>
 ## 4      AD 2000   m 25-34     1
 ## 5      AD 2000   m 35-44     0
 ## 6      AD 2000   m 45-54     0</code></pre>
+<p>Ya con esto, tenemos el data set en formato tidy.</p>
 </div>
+</div>
+<div id="laboratorio" class="section level2">
+<h2>Laboratorio</h2>
+<p>Trabajar el Rdata llamado “wide_religion.Rda” y tenerlo en formato tidy. Trabajar el Rdata lamado “dirty-religion.Rda” y llevarlo a formato tidy.</p>
+<p>Ambos deben de quedar en la misma dimensional.</p>
 </div>
 </div>
 

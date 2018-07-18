@@ -12,9 +12,11 @@ opts_knit$set(root.dir = "~/Documents/ds_minor/data-wrangling")
 
 ## Objetivos
 
-1. Cargar Archivos de Texto a R (Python).
+1. Cargar Archivos de Texto a R.
 2. Entender los diferentes formatos de archivos de texto.
 3. Usar las diferentes opciones de las funciones para cargar archivos de texto.
+4. Tratar de decidir cual de las funciones es la mejor para cargar archivos de texto.
+5. Limpiar un documento para un futuro análisis de sentimiento. 
 
 ## Archivos de Texto
 
@@ -23,11 +25,17 @@ opts_knit$set(root.dir = "~/Documents/ds_minor/data-wrangling")
 ```{r}
 text_file <- '../data/quijote.txt'
 readLines(text_file,n=10,skipNul = TRUE)
+##Cambiar el encoding para que lea los caracteres en español. 
+readLines(text_file,n=10,skipNul = TRUE, encoding = "UTF-8")
 ```
+
+Si queremos leer un número delimitado de filas, utilizamos el parámetro ```n=```. 
+También podemos ahorrarnos el espacio de las filas vacías con la función ```skipNul```. 
+
 
 
 ```{r}
-quijote <- readLines(text_file,n=10,skipNul = TRUE)
+readLines(text_file,n=10,skipNul = TRUE, encoding = "UTF-8")
 str(quijote)
 ```
 
@@ -41,14 +49,32 @@ quijote_lines <- read_lines(text_file)
 str(quijote_lines)
 ```
 
+Si se dan cuenta, el encoding de este ya viene en UTF-8. 
+
 ```{r}
 quijote_lines[1:10]
 ```
 
 
+##Como sabemos cual funcion es mejor?
+
+Tanto readLines como read_lines cumplen la misma función. Sin embargo, read_lines es más rápido:
+Tal vez aca no sea tan notable, pero en documentos grandes se empieza a evidenciar la diferencia. 
+
+User CPU time” gives the CPU time spent by the current process (i.e., the current R session) and “system CPU time” gives the CPU time spent by the kernel (the operating system) on behalf of the current process. The operating system is used for things like opening files, doing input or output, starting other processes, and looking at the system clock: operations that involve resources that many processes must share. Different operating systems will have different things done by the operating system.
+
+```{r}
+system.time(readLines(text_file))
+system.time(read_lines(text_file))
+```
+
+
+
+
 ```{r}
 quijote_file <- read_file(text_file) 
 str(quijote_file)
+##Cuanto tiempo se tarda en leer todo el documento esta funcion?
 ```
 
 ```{r}
@@ -60,14 +86,29 @@ substr(quijote_file,0,150)
 read_lines(text_file,skip = 10,n_max = 20)
 ```
 
+
+```{r}
+read_lines(text_file,skip = 10,n_max = 20)
+```
+
+
+
 ## archivo csv 
 
 
 ```{r}
 hour<-read_csv("../data/hour.csv")
+hour_2<-read.csv("../data/hour.csv")
+system.time(read_csv("../data/hour.csv"))
+system.time(read.csv("../data/hour.csv"))
+
+
 head(hour)
 ```
 
+##Ejercicio
 
+1. comparar el tiempo que se tarda en cargar csv el el base de R y el read_csv de readr.
+2.cargar el archivo de "ejemplo" a R.
 
 
