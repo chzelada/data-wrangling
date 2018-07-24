@@ -1,11 +1,13 @@
 ---
 title: "Semana 1"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r "setup", include=FALSE}
 require(knitr)
-opts_knit$set(root.dir = "~/Documents/ds_minor/data-wrangling")
+#opts_knit$set(root.dir = "~/Documents/ds_minor/data-wrangling")
 ```
 
 
@@ -36,14 +38,13 @@ También podemos ahorrarnos el espacio de las filas vacías con la función ```s
 
 ```{r}
 readLines(text_file,n=10,skipNul = TRUE, encoding = "UTF-8")
-str(quijote)
 ```
 
 
 
 
 ### Función read_lines y read_file
-```{r}
+```{r, cache=TRUE}
 library(readr)
 quijote_lines <- read_lines(text_file)
 str(quijote_lines)
@@ -91,6 +92,63 @@ read_lines(text_file,skip = 10,n_max = 20)
 read_lines(text_file,skip = 10,n_max = 20)
 ```
 
+## Posibles aplicaciones
+
+Que pasa si quisieramos analizar el texto de algun documento completo?
+
+Esto es común para análisis de plagio, para análisis de sentimiento o para clasificación de comentarios.
+
+primero volveremos un dataframe al texto del quijote. Utilizamos la funcion del tidyverse para esto.
+
+
+
+
+
+```{r}
+library(tidytext)
+library(tidyverse)
+
+quijote_frame<-data_frame(txt=quijote_lines)
+quijote_frame
+```
+
+
+Esto nos devuelve un data frame donde cada linea del texto es una observacion.
+
+```{r}
+quijote_words <- unnest_tokens(quijote_frame,output = word,input = txt, token = "words" )
+quijote_sentences <- unnest_tokens(quijote_frame,output = word,input = txt, token = "sentences" )
+quijote_count<-count(quijote_words,word, sort = TRUE)
+
+```
+
+
+```{r}
+library(quanteda)
+spanish_stopwords<-data_frame(word=quanteda::stopwords(language = "es"))
+spanish_stopwords
+
+```
+
+```{r}
+quijote_words_clean <- quijote_frame %>% 
+  unnest_tokens(output =word, input = txt, token="words") %>%
+  anti_join(spanish_stopwords) %>%
+  count(word, sort=TRUE)
+
+quijote_words_clean
+
+# https://rpubs.com/jboscomendoza/analisis_sentimientos_lexico_afinn
+
+```
+
+
+
+
+
+
+
+
 
 
 ## archivo csv 
@@ -101,10 +159,26 @@ hour<-read_csv("../data/hour.csv")
 hour_2<-read.csv("../data/hour.csv")
 system.time(read_csv("../data/hour.csv"))
 system.time(read.csv("../data/hour.csv"))
+read_delim("../data/hour.csv",delim = ";")
+
+
 
 
 head(hour)
 ```
+
+## archivo Excel
+
+```{r}
+library(readxl)
+bancos_activos <- read_excel("../data/bancos.xlsx")
+bancos_agencias <- read_excel("../data/bancos.xlsx",sheet = "agencias")
+
+```
+
+
+
+
 
 ##Ejercicio
 
