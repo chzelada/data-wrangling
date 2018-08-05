@@ -1,0 +1,431 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Solucion Lab \#1},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Solucion Lab \#1}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\subsection{Objetivos}\label{objetivos}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Solucion del laboratorio de la union de tablas en un mismo directorio
+\end{enumerate}
+
+\subsection{Archivos de Texto}\label{archivos-de-texto}
+
+\subsubsection{Cargando librerias}\label{cargando-librerias}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: dplyr
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(readxl)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: readxl
+\end{verbatim}
+
+\subsubsection{\texorpdfstring{Funcion
+\texttt{list.files()}}{Funcion list.files()}}\label{funcion-list.files}
+
+\paragraph{Asignando la lista de archivos de la carpeta a una
+variable}\label{asignando-la-lista-de-archivos-de-la-carpeta-a-una-variable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{files <-}\StringTok{ }\KeywordTok{list.files}\NormalTok{(}\DataTypeTok{path =} \StringTok{"C:/Users/JR29/Documents/GitHub/data-wrangling/data/01"}\NormalTok{)}
+\NormalTok{files}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "01-2017.xlsx" "02-2017.xlsx" "03-2017.xlsx" "04-2017.xlsx"
+##  [5] "05-2017.xlsx" "06-2017.xlsx" "07-2017.xlsx" "08-2017.xlsx"
+##  [9] "09-2017.xlsx" "10-2017.xlsx" "11-2017.xlsx"
+\end{verbatim}
+
+\subsubsection{\texorpdfstring{Funcion
+\texttt{read\_excel()}}{Funcion read\_excel()}}\label{funcion-read_excel}
+
+\paragraph{\texorpdfstring{Lectura del primer archivo de Excel de la
+carpeta
+\texttt{01}}{Lectura del primer archivo de Excel de la carpeta 01}}\label{lectura-del-primer-archivo-de-excel-de-la-carpeta-01}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inv <-}\StringTok{ }\KeywordTok{read_excel}\NormalTok{(files[}\DecValTok{1}\NormalTok{], }\CommentTok{#sheet = "sheet1"}
+                  \DataTypeTok{col_types =} \StringTok{"text"}\NormalTok{)}
+\KeywordTok{str}\NormalTok{(inv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    192 obs. of  8 variables:
+##  $ COD_VIAJE: chr  "10000001" "10000002" "10000003" "10000004" ...
+##  $ CLIENTE  : chr  "EL PINCHE OBELISCO / Despacho a cliente" "TAQUERIA EL CHINITO |||Faltante" "TIENDA LA BENDICION / Despacho a cliente" "TAQUERIA EL CHINITO" ...
+##  $ UBICACION: chr  "76002" "76002" "76002" "76002" ...
+##  $ CANTIDAD : chr  "1200" "1433" "1857" "339" ...
+##  $ PILOTO   : chr  "Fernando Mariano Berrio" "Hector Aragones Frutos" "Pedro Alvarez Parejo" "Angel Valdez Alegria" ...
+##  $ Q        : chr  "300" "358.25" "464.25" "84.75" ...
+##  $ CREDITO  : chr  "30" "90" "60" "30" ...
+##  $ UNIDAD   : chr  "Camion Grande" "Camion Grande" "Camion Grande" "Panel" ...
+\end{verbatim}
+
+\subsubsection{Determinar el tipo de variable por
+columna}\label{determinar-el-tipo-de-variable-por-columna}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#inv$COD_VIAJE se queda en texto}
+\CommentTok{#inv$CLIENTE se queda en texto}
+\NormalTok{inv}\OperatorTok{$}\NormalTok{UBICACION <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(inv}\OperatorTok{$}\NormalTok{UBICACION)}
+\NormalTok{inv}\OperatorTok{$}\NormalTok{CANTIDAD <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(inv}\OperatorTok{$}\NormalTok{CANTIDAD)}
+\CommentTok{#inv$PILOTO se queda en texto}
+\NormalTok{inv}\OperatorTok{$}\NormalTok{Q <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(inv}\OperatorTok{$}\NormalTok{Q)}
+\NormalTok{inv}\OperatorTok{$}\NormalTok{CREDITO <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(inv}\OperatorTok{$}\NormalTok{CREDITO)}
+\NormalTok{inv}\OperatorTok{$}\NormalTok{UNIDAD <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(inv}\OperatorTok{$}\NormalTok{UNIDAD)}
+\KeywordTok{str}\NormalTok{(inv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    192 obs. of  8 variables:
+##  $ COD_VIAJE: chr  "10000001" "10000002" "10000003" "10000004" ...
+##  $ CLIENTE  : chr  "EL PINCHE OBELISCO / Despacho a cliente" "TAQUERIA EL CHINITO |||Faltante" "TIENDA LA BENDICION / Despacho a cliente" "TAQUERIA EL CHINITO" ...
+##  $ UBICACION: Factor w/ 2 levels "76001","76002": 2 2 2 2 1 1 2 1 2 2 ...
+##  $ CANTIDAD : num  1200 1433 1857 339 1644 ...
+##  $ PILOTO   : chr  "Fernando Mariano Berrio" "Hector Aragones Frutos" "Pedro Alvarez Parejo" "Angel Valdez Alegria" ...
+##  $ Q        : num  300 358.2 464.2 84.8 411 ...
+##  $ CREDITO  : Factor w/ 3 levels "30","60","90": 1 3 2 1 1 1 3 2 1 3 ...
+##  $ UNIDAD   : Factor w/ 3 levels "Camion Grande",..: 1 1 1 3 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\subsubsection{Seleccionando y nombrando columnas
+importantes}\label{seleccionando-y-nombrando-columnas-importantes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inv <-}\StringTok{ }\NormalTok{inv[,}\KeywordTok{c}\NormalTok{(}\StringTok{"COD_VIAJE"}\NormalTok{, }\StringTok{"CLIENTE"}\NormalTok{, }\StringTok{"UBICACION"}\NormalTok{, }\StringTok{"CANTIDAD"}\NormalTok{, }\StringTok{"PILOTO"}\NormalTok{, }\StringTok{"Q"}\NormalTok{, }\StringTok{"CREDITO"}\NormalTok{, }\StringTok{"UNIDAD"}\NormalTok{)]}
+\CommentTok{#names(inv) <- c(vector con nombres de columnas)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{Funcion
+\texttt{substr()}}{Funcion substr()}}\label{funcion-substr}
+
+\paragraph{\texorpdfstring{Agregando columna \texttt{MES} y
+\texttt{ANIO}}{Agregando columna MES y ANIO}}\label{agregando-columna-mes-y-anio}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inv}\OperatorTok{$}\NormalTok{MES <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}\KeywordTok{substr}\NormalTok{(files[}\DecValTok{1}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\NormalTok{inv}\OperatorTok{$}\NormalTok{ANIO <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}\KeywordTok{substr}\NormalTok{(files[}\DecValTok{1}\NormalTok{],}\DecValTok{4}\NormalTok{,}\DecValTok{7}\NormalTok{))}
+\KeywordTok{str}\NormalTok{(inv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    192 obs. of  10 variables:
+##  $ COD_VIAJE: chr  "10000001" "10000002" "10000003" "10000004" ...
+##  $ CLIENTE  : chr  "EL PINCHE OBELISCO / Despacho a cliente" "TAQUERIA EL CHINITO |||Faltante" "TIENDA LA BENDICION / Despacho a cliente" "TAQUERIA EL CHINITO" ...
+##  $ UBICACION: Factor w/ 2 levels "76001","76002": 2 2 2 2 1 1 2 1 2 2 ...
+##  $ CANTIDAD : num  1200 1433 1857 339 1644 ...
+##  $ PILOTO   : chr  "Fernando Mariano Berrio" "Hector Aragones Frutos" "Pedro Alvarez Parejo" "Angel Valdez Alegria" ...
+##  $ Q        : num  300 358.2 464.2 84.8 411 ...
+##  $ CREDITO  : Factor w/ 3 levels "30","60","90": 1 3 2 1 1 1 3 2 1 3 ...
+##  $ UNIDAD   : Factor w/ 3 levels "Camion Grande",..: 1 1 1 3 1 1 1 1 1 1 ...
+##  $ MES      : Factor w/ 1 level "01": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ ANIO     : Factor w/ 1 level "2017": 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\subsubsection{Ciclo para union de todos los
+archivos}\label{ciclo-para-union-de-todos-los-archivos}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{i=}\DecValTok{2}
+\ControlFlowTok{while}\NormalTok{(i}\OperatorTok{<=}\KeywordTok{length}\NormalTok{(files))\{}
+\NormalTok{  g <-}\StringTok{ }\KeywordTok{read_excel}\NormalTok{(files[i]) }\CommentTok{#sheet = "sheet1"}
+\NormalTok{  g <-}\StringTok{ }\NormalTok{g[,}\KeywordTok{c}\NormalTok{(}\StringTok{"COD_VIAJE"}\NormalTok{, }\StringTok{"CLIENTE"}\NormalTok{, }\StringTok{"UBICACION"}\NormalTok{, }\StringTok{"CANTIDAD"}\NormalTok{, }\StringTok{"PILOTO"}\NormalTok{, }\StringTok{"Q"}\NormalTok{, }\StringTok{"CREDITO"}\NormalTok{, }\StringTok{"UNIDAD"}\NormalTok{)]}
+\NormalTok{  g}\OperatorTok{$}\NormalTok{MES <-}\StringTok{ }\KeywordTok{substr}\NormalTok{(files[i],}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{  g}\OperatorTok{$}\NormalTok{ANIO <-}\StringTok{ }\KeywordTok{substr}\NormalTok{(files[i],}\DecValTok{4}\NormalTok{,}\DecValTok{7}\NormalTok{)}
+  \CommentTok{#names(g) <- c(vector con nombres de columnas)}
+\NormalTok{  inv <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(inv,g)}
+\NormalTok{  i=i}\OperatorTok{+}\DecValTok{1}
+\NormalTok{\}}
+\KeywordTok{str}\NormalTok{(inv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    2180 obs. of  10 variables:
+##  $ COD_VIAJE: chr  "10000001" "10000002" "10000003" "10000004" ...
+##  $ CLIENTE  : chr  "EL PINCHE OBELISCO / Despacho a cliente" "TAQUERIA EL CHINITO |||Faltante" "TIENDA LA BENDICION / Despacho a cliente" "TAQUERIA EL CHINITO" ...
+##  $ UBICACION: Factor w/ 2 levels "76001","76002": 2 2 2 2 1 1 2 1 2 2 ...
+##  $ CANTIDAD : num  1200 1433 1857 339 1644 ...
+##  $ PILOTO   : chr  "Fernando Mariano Berrio" "Hector Aragones Frutos" "Pedro Alvarez Parejo" "Angel Valdez Alegria" ...
+##  $ Q        : num  300 358.2 464.2 84.8 411 ...
+##  $ CREDITO  : Factor w/ 3 levels "30","60","90": 1 3 2 1 1 1 3 2 1 3 ...
+##  $ UNIDAD   : Factor w/ 3 levels "Camion Grande",..: 1 1 1 3 1 1 1 1 1 1 ...
+##  $ MES      : Factor w/ 11 levels "01","02","03",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ ANIO     : Factor w/ 1 level "2017": 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(inv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 10
+##   COD_VIAJE CLIENTE   UBICACION CANTIDAD PILOTO     Q CREDITO UNIDAD MES  
+##   <chr>     <chr>     <fct>        <dbl> <chr>  <dbl> <fct>   <fct>  <fct>
+## 1 10000001  EL PINCH~ 76002        1200. Ferna~ 300.  30      Camio~ 01   
+## 2 10000002  TAQUERIA~ 76002        1433. Hecto~ 358.  90      Camio~ 01   
+## 3 10000003  TIENDA L~ 76002        1857. Pedro~ 464.  60      Camio~ 01   
+## 4 10000004  TAQUERIA~ 76002         339. Angel~  84.8 30      Panel  01   
+## 5 10000005  CHICHARR~ 76001        1644. Juan ~ 411.  30      Camio~ 01   
+## 6 10000006  UBIQUO L~ 76001        1827. Luis ~ 457.  30      Camio~ 01   
+## # ... with 1 more variable: ANIO <fct>
+\end{verbatim}
+
+\subsubsection{Resumen de costo por Mes}\label{resumen-de-costo-por-mes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inv }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(MES) }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\StringTok{`}\DataTypeTok{Costo Total}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{sum}\NormalTok{(Q))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 11 x 2
+##    MES   `Costo Total`
+##    <fct>         <dbl>
+##  1 01           55416.
+##  2 02           56226.
+##  3 03           48467.
+##  4 04           51708.
+##  5 05           60075.
+##  6 06           52262.
+##  7 07           56683.
+##  8 08           53262.
+##  9 09           51519.
+## 10 10           55180.
+## 11 11           58050.
+\end{verbatim}
+
+\subsubsection{Resumen de costo por
+Ubicacion}\label{resumen-de-costo-por-ubicacion}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inv }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(UBICACION) }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\StringTok{`}\DataTypeTok{Costo Total}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{sum}\NormalTok{(Q))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   UBICACION `Costo Total`
+##   <fct>             <dbl>
+## 1 76001           298277.
+## 2 76002           300571.
+\end{verbatim}
+
+\subsubsection{Resumen de costo por
+Unidad}\label{resumen-de-costo-por-unidad}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inv }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(UNIDAD) }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\StringTok{`}\DataTypeTok{Costo Total}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{sum}\NormalTok{(Q))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   UNIDAD         `Costo Total`
+##   <fct>                  <dbl>
+## 1 Camion Grande        455466.
+## 2 Camion Pequeño       112815.
+## 3 Panel                 30566.
+\end{verbatim}
+
+\subsubsection{Resumen de costo por Mes, Ubicacion y
+Unidad}\label{resumen-de-costo-por-mes-ubicacion-y-unidad}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{inv }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(MES, UBICACION, UNIDAD) }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\StringTok{`}\DataTypeTok{Costo Total}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{sum}\NormalTok{(Q))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 66 x 4
+## # Groups:   MES, UBICACION [?]
+##    MES   UBICACION UNIDAD         `Costo Total`
+##    <fct> <fct>     <fct>                  <dbl>
+##  1 01    76001     Camion Grande         21941.
+##  2 01    76001     Camion Pequeño         5112.
+##  3 01    76001     Panel                  1263.
+##  4 01    76002     Camion Grande         23266.
+##  5 01    76002     Camion Pequeño         2863.
+##  6 01    76002     Panel                   972.
+##  7 02    76001     Camion Grande         21638.
+##  8 02    76001     Camion Pequeño         4531.
+##  9 02    76001     Panel                  1308.
+## 10 02    76002     Camion Grande         21584.
+## # ... with 56 more rows
+\end{verbatim}
+
+
+\end{document}
