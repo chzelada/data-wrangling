@@ -3,6 +3,7 @@ title: 'Solucion Lab #1'
 output:
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ```{r "setup", include=FALSE}
@@ -14,24 +15,24 @@ opts_knit$set(root.dir = "C:/Users/JR29/Documents/GitHub/data-wrangling/data/01"
 
 ## Objetivos
 
-1. Soluci?n del laboratorio de la uni?n de tablas en un mismo directorio
+1. Solucion del laboratorio de la union de tablas en un mismo directorio
 
 ## Archivos de Texto
 
-### Cargando librer?as
+### Cargando librerias
 ```{r}
 require(dplyr)
 require(readxl)
 ```
 
-### Funci?n `list.files()`
+### Funcion `list.files()`
 #### Asignando la lista de archivos de la carpeta a una variable
 ```{r}
 files <- list.files(path = "C:/Users/JR29/Documents/GitHub/data-wrangling/data/01")
 files
 ```
 
-### Funci?n `read_excel()`
+### Funcion `read_excel()`
 #### Lectura del primer archivo de Excel de la carpeta `01`
 ```{r}
 inv <- read_excel(files[1], #sheet = "sheet1"
@@ -54,11 +55,11 @@ str(inv)
 
 ### Seleccionando y nombrando columnas importantes
 ```{r}
-inv <- inv[,c(1:8)]
+inv <- inv[,c("COD_VIAJE", "CLIENTE", "UBICACION", "CANTIDAD", "PILOTO", "Q", "CREDITO", "UNIDAD")]
 #names(inv) <- c(vector con nombres de columnas)
 ```
 
-### Funci?n `substr()`
+### Funcion `substr()`
 #### Agregando columna `MES` y `ANIO`
 ```{r}
 inv$MES <- as.factor(substr(files[1],1,2))
@@ -66,12 +67,12 @@ inv$ANIO <- as.factor(substr(files[1],4,7))
 str(inv)
 ```
 
-### Ciclo para uni?n de todos los archivos
+### Ciclo para union de todos los archivos
 ```{r}
 i=2
 while(i<=length(files)){
   g <- read_excel(files[i]) #sheet = "sheet1"
-  g <- g[,c(1:8)]
+  g <- g[,c("COD_VIAJE", "CLIENTE", "UBICACION", "CANTIDAD", "PILOTO", "Q", "CREDITO", "UNIDAD")]
   g$MES <- substr(files[i],1,2)
   g$ANIO <- substr(files[i],4,7)
   #names(g) <- c(vector con nombres de columnas)
