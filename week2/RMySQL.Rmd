@@ -23,7 +23,7 @@ library("RMySQL")
 ```
 
 ## Conectar a Base de Datos
-## Esto es solo para comitear. 
+
 
 Podemos establecer una conexión a una base de datos de MySQL usando la función ```dbConnect()``` . Para esto necesitamos los parámetros que usaríamos en alguna IDE de SQL regular:
 

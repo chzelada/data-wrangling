@@ -1,0 +1,99 @@
+---
+title: "dplyr"
+author: "Tepi"
+date: "August 5, 2018"
+output: html_document
+---
+
+## Objetivos
+
+1. Aprender los verbos básicos de la libreria ```dplyr```
+2. Familiarizarse con el uso de pipelines de funciones.
+3. Breve discusión sobre la naturaleza de los datos. 
+4. Introduccion a funciones del paquete stringr.
+
+
+### Carga de librerias
+
+
+```{r, message=FALSE, results='hide', warning=FALSE}
+library(tidyverse)
+library(readr)
+
+```
+
+
+
+### Carga de Datos
+
+Utilizaremos un dataset que contiene datos sobre la temporada Europea 2017/2018 de futbol.
+
+```{r, message=FALSE, cache=TRUE}
+players_score<-read_csv(file ="football-world-cup-2018-dataset/Players_Score.csv")
+head(players_score)
+
+```
+**Mins**: Minutes played
+
+**Goals**: Total goals	
+
+**Assists**: Total assists
+
+**Yel**: Yellow card
+
+**Red**: Red card
+
+**SpG**: Shots per game
+
+**PS**: Pass success percentage
+
+**AerialsWon**: Aerial duels won per game	
+
+**MotM**: Man of the match
+
+_Only players from English Premier League, French Ligue 1, German Bundesliga, Italian Serie A and Spanish La Liga are displayed_
+
+
+## Discusión
+
+Muchas de estas variables son de naturaleza numérica, pero están siendo importadas como caracter. La variable _Apps_ en particular, presenta apariciones entre parentesis cuando el jugador entra de cambio. Esta informacion es valiosa, pero nos dificulta el trabajo del dataset.
+
+Haremos lo siguiente:
+1. La variable Apps serán las apariciones titulares de cada uno de los jugadores.
+2. Extraeremos las apariciones por cambio, y las volveremos otra variable llamada _cambio_
+3. Para esto, necesitaremos el apoyo de uso expresiones regulares y del paquete  ```stringr```.
+
+
+```{r}
+players_score$cambio<-str_extract_all(players_score$Apps, "\\([^)]*\\)","")
+players_score$cambio<-str_extract_all(players_score$cambio,"[0-9]+")
+players_score$Apps<-str_replace_all(players_score$Apps, "\\([^)]*\\)","")
+
+```
+
+## Volver todas las variables numéricas a formato numérico 
+
+```{r, warning=FALSE}
+numbers<-c("age","Apps","cambio","Goals","Assists","Yel","Red","SpG","PS","AerialsWon","MotM","Rating")
+players_score[numbers] <- lapply(players_score[numbers],as.numeric)
+head(players_score)
+
+```
+
+Ahora nos encontramos con otro problema. Al hacer el cambio a formato numérico, introdujimos al data set NAs. ¿Qué hacemos con ellos?
+
+```{r}
+
+players_score[numbers]<-players_score[numbers] %>% 
+  replace_na(list(age=0,Goals=0,Assists=0,Yel=0,Red=0,SpG=0,PS=0,AerialsWon=0,MotM=0,Rating=0))
+```
+
+Existen metodologías específicas para trabajar con valores faltantes en los data sets. Sin embargo, siempre es importante entender con qué información estamos trabajando. En este caso, se puede inferir que los datos faltantes son 0, por la forma en que esta diseñado y hemos trabajado el data set.
+
+## dplyr
+
+verbos:
+
+
+
+
