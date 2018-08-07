@@ -177,28 +177,8 @@ players_score$Apps&lt;-str_replace_all(players_score$Apps, &quot;\\([^)]*\\)&quo
 <div id="volver-todas-las-variables-numericas-a-formato-numerico" class="section level2">
 <h2>Volver todas las variables numéricas a formato numérico</h2>
 <pre class="r"><code>numbers&lt;-c(&quot;age&quot;,&quot;Apps&quot;,&quot;cambio&quot;,&quot;Goals&quot;,&quot;Assists&quot;,&quot;Yel&quot;,&quot;Red&quot;,&quot;SpG&quot;,&quot;PS&quot;,&quot;AerialsWon&quot;,&quot;MotM&quot;,&quot;Rating&quot;)
-players_score[numbers] &lt;- lapply(players_score[numbers],as.numeric)</code></pre>
-<pre><code>## Warning in lapply(players_score[numbers], as.numeric): NAs introduced by
-## coercion
-
-## Warning in lapply(players_score[numbers], as.numeric): NAs introduced by
-## coercion
-
-## Warning in lapply(players_score[numbers], as.numeric): NAs introduced by
-## coercion
-
-## Warning in lapply(players_score[numbers], as.numeric): NAs introduced by
-## coercion
-
-## Warning in lapply(players_score[numbers], as.numeric): NAs introduced by
-## coercion
-
-## Warning in lapply(players_score[numbers], as.numeric): NAs introduced by
-## coercion
-
-## Warning in lapply(players_score[numbers], as.numeric): NAs introduced by
-## coercion</code></pre>
-<pre class="r"><code>head(players_score)</code></pre>
+players_score[numbers] &lt;- lapply(players_score[numbers],as.numeric)
+head(players_score)</code></pre>
 <pre><code>## # A tibble: 6 x 16
 ##    Rank player    club     age  Apps  Mins Goals Assists   Yel   Red   SpG
 ##   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -210,6 +190,200 @@ players_score[numbers] &lt;- lapply(players_score[numbers],as.numeric)</code></p
 ## 6     6 Luuk de ~ PSV E~  27.0  22.0  2078 12.0     5.00  1.00 NA     3.40
 ## # ... with 5 more variables: PS &lt;dbl&gt;, AerialsWon &lt;dbl&gt;, MotM &lt;dbl&gt;,
 ## #   Rating &lt;dbl&gt;, cambio &lt;dbl&gt;</code></pre>
+<p>Ahora nos encontramos con otro problema. Al hacer el cambio a formato numérico, introdujimos al data set NAs. ¿Qué hacemos con ellos?</p>
+<pre class="r"><code>players_score[numbers]&lt;-players_score[numbers] %&gt;% 
+  replace_na(list(age=0,Goals=0,Assists=0,Yel=0,Red=0,SpG=0,PS=0,AerialsWon=0,MotM=0,Rating=0,cambio=0))</code></pre>
+<p>Existen metodologías específicas para trabajar con valores faltantes en los data sets. Sin embargo, siempre es importante entender con qué información estamos trabajando. En este caso, se puede inferir que los datos faltantes son 0, por la forma en que esta diseñado y hemos trabajado el data set.</p>
+</div>
+<div id="dplyr" class="section level2">
+<h2>dplyr</h2>
+<div id="filter" class="section level3">
+<h3><code>filter()</code></h3>
+<p>Sirve para filtrar filas con algún parámetro en específico.</p>
+<p>Filtremos a los jugadores del Real Madrid menores de 30 años. Filtremos a los jugadores que son del Real Madrid o del Barcelona menores de 30 años.</p>
+<pre class="r"><code>filter(players_score, club==&quot;Real Madrid&quot;, age &lt; 30)</code></pre>
+<pre><code>## Warning: package 'bindrcpp' was built under R version 3.4.4</code></pre>
+<pre><code>## # A tibble: 41 x 16
+##     Rank player   club     age  Apps  Mins Goals Assists   Yel   Red   SpG
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1     5 Casemiro Real ~  26.0  30.0  2601  5.00    3.00  8.00  0    1.10 
+##  2     6 Gareth ~ Real ~  28.0  20.0  1803 16.0     2.00  5.00  0    3.00 
+##  3     8 Toni Kr~ Real ~  28.0  26.0  2268  5.00    7.00  4.00  0    1.50 
+##  4    26 Isco     Real ~  26.0  21.0  1781  7.00    7.00  1.00  0    1.60 
+##  5    26 Isco     Real ~  26.0  21.0  1781  7.00    7.00  1.00  0    1.60 
+##  6    45 Daniel ~ Real ~  26.0  25.0  2223  0       2.00 11.0   1.00 0.500
+##  7    45 Daniel ~ Real ~  26.0  25.0  2223  0       2.00 11.0   1.00 0.500
+##  8    52 Marco A~ Real ~  22.0  19.0  1839  6.00    6.00  2.00  0    1.80 
+##  9    52 Marco A~ Real ~  22.0  19.0  1839  6.00    6.00  2.00  0    1.80 
+## 10    84 Lucas V~ Real ~  26.0  16.0  1670  4.00    7.00  3.00  0    1.00 
+## # ... with 31 more rows, and 5 more variables: PS &lt;dbl&gt;, AerialsWon &lt;dbl&gt;,
+## #   MotM &lt;dbl&gt;, Rating &lt;dbl&gt;, cambio &lt;dbl&gt;</code></pre>
+<pre class="r"><code>filter(players_score, club %in% c(&quot;Real Madrid&quot;,&quot;Barcelona&quot;), age &lt; 30)</code></pre>
+<pre><code>## # A tibble: 76 x 16
+##     Rank player   club     age  Apps  Mins Goals Assists   Yel   Red   SpG
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1     4 Coutinho Barce~  25.0  16.0  1304  8.00    5.00  1.00  0    2.10 
+##  2     5 Casemiro Real ~  26.0  30.0  2601  5.00    3.00  8.00  0    1.10 
+##  3     6 Gareth ~ Real ~  28.0  20.0  1803 16.0     2.00  5.00  0    3.00 
+##  4     8 Toni Kr~ Real ~  28.0  26.0  2268  5.00    7.00  4.00  0    1.50 
+##  5    16 Sergio ~ Barce~  29.0  30.0  2600  1.00    4.00  8.00  0    0.200
+##  6    18 Jordi A~ Barce~  29.0  30.0  2745  2.00    8.00  8.00  0    0.500
+##  7    19 Sergi R~ Barce~  26.0  24.0  2231  1.00    7.00  3.00  2.00 0.300
+##  8    16 Sergio ~ Barce~  29.0  30.0  2600  1.00    4.00  8.00  0    0.200
+##  9    18 Jordi A~ Barce~  29.0  30.0  2745  2.00    8.00  8.00  0    0.500
+## 10    19 Sergi R~ Barce~  26.0  24.0  2231  1.00    7.00  3.00  2.00 0.300
+## # ... with 66 more rows, and 5 more variables: PS &lt;dbl&gt;, AerialsWon &lt;dbl&gt;,
+## #   MotM &lt;dbl&gt;, Rating &lt;dbl&gt;, cambio &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="pipe-operator" class="section level1">
+<h1>%&gt;% pipe operator</h1>
+<p>El pipe operator es una de las herramientas mas utiles de R. El operador toma al objeto del lado izquierdo y lo inserta en el del lado derecho:</p>
+<pre class="r"><code>players_score %&gt;% 
+  filter(club==&quot;Real Madrid&quot;)</code></pre>
+<pre><code>## # A tibble: 63 x 16
+##     Rank player   club     age  Apps  Mins Goals Assists   Yel   Red   SpG
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1     2 Cristia~ Real ~  33.0  27.0  2293 26.0     5.00  1.00  0     6.60
+##  2     5 Casemiro Real ~  26.0  30.0  2601  5.00    3.00  8.00  0     1.10
+##  3     6 Gareth ~ Real ~  28.0  20.0  1803 16.0     2.00  5.00  0     3.00
+##  4     8 Toni Kr~ Real ~  28.0  26.0  2268  5.00    7.00  4.00  0     1.50
+##  5    15 Luka Mo~ Real ~  32.0  23.0  1976  1.00    6.00  3.00  0     1.30
+##  6    15 Luka Mo~ Real ~  32.0  23.0  1976  1.00    6.00  3.00  0     1.30
+##  7    26 Isco     Real ~  26.0  21.0  1781  7.00    7.00  1.00  0     1.60
+##  8    26 Isco     Real ~  26.0  21.0  1781  7.00    7.00  1.00  0     1.60
+##  9    40 Sergio ~ Real ~  32.0  26.0  2292  4.00    1.00  7.00  2.00  1.10
+## 10    40 Sergio ~ Real ~  32.0  26.0  2292  4.00    1.00  7.00  2.00  1.10
+## # ... with 53 more rows, and 5 more variables: PS &lt;dbl&gt;, AerialsWon &lt;dbl&gt;,
+## #   MotM &lt;dbl&gt;, Rating &lt;dbl&gt;, cambio &lt;dbl&gt;</code></pre>
+<div id="select" class="section level2">
+<h2><code>select ()</code></h2>
+<p>sirve para filtrar las variables o columnas de un data set. Funciona de manera muy similar al Select de SQL.</p>
+<p>Sin utilizar el pipe operator:</p>
+<pre class="r"><code>##Seleccionemos unicamente las columnas de club y edad y filtremos por club.
+filter(select(players_score,club,age),club==&quot;Real Madrid&quot;)</code></pre>
+<pre><code>## # A tibble: 63 x 2
+##    club          age
+##    &lt;chr&gt;       &lt;dbl&gt;
+##  1 Real Madrid  33.0
+##  2 Real Madrid  26.0
+##  3 Real Madrid  28.0
+##  4 Real Madrid  28.0
+##  5 Real Madrid  32.0
+##  6 Real Madrid  32.0
+##  7 Real Madrid  26.0
+##  8 Real Madrid  26.0
+##  9 Real Madrid  32.0
+## 10 Real Madrid  32.0
+## # ... with 53 more rows</code></pre>
+<pre class="r"><code>##Seleccionemos unicamente las columnas de club y edad y filtremos por club.
+players_score %&gt;%
+  select(club,age) %&gt;%
+  filter(club==&quot;Real Madrid&quot;)</code></pre>
+<pre><code>## # A tibble: 63 x 2
+##    club          age
+##    &lt;chr&gt;       &lt;dbl&gt;
+##  1 Real Madrid  33.0
+##  2 Real Madrid  26.0
+##  3 Real Madrid  28.0
+##  4 Real Madrid  28.0
+##  5 Real Madrid  32.0
+##  6 Real Madrid  32.0
+##  7 Real Madrid  26.0
+##  8 Real Madrid  26.0
+##  9 Real Madrid  32.0
+## 10 Real Madrid  32.0
+## # ... with 53 more rows</code></pre>
+</div>
+<div id="mutate" class="section level2">
+<h2><code>mutate()</code></h2>
+<p>Esta funcion nos permite crear nuevas variables, con base a alguna operación aritmética o matemática que querramos utilizar en nuestro dataset.</p>
+<div id="ejercicio" class="section level3">
+<h3>Ejercicio</h3>
+<p>Creemos un indicador de goles por minuto, para tratar de determinar cual es el jugador mas efectivo en el set de datos.</p>
+<p>¿Qué hay de malo en este análisis?</p>
+<pre class="r"><code>players_score %&gt;%
+  mutate(Goal_Rate = Mins/Goals) %&gt;%
+  arrange(desc(Goal_Rate))</code></pre>
+<pre><code>## # A tibble: 11,150 x 17
+##     Rank player   club     age  Apps  Mins Goals Assists   Yel   Red   SpG
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1    21 Frenkie~ Ajax    21.0  16.0  1560     0    7.00  2.00     0 0.500
+##  2    21 Frenkie~ Ajax    21.0  16.0  1560     0    7.00  2.00     0 0.500
+##  3    46 Alexand~ Vites~  29.0  19.0  1709     0    8.00  3.00     0 1.00 
+##  4    47 Jurgen ~ Excel~  25.0  33.0  2970     0    2.00  7.00     0 0.700
+##  5    48 Kevin D~ Feyen~  21.0  18.0  1694     0    4.00  1.00     0 0.800
+##  6    46 Alexand~ Vites~  29.0  19.0  1709     0    8.00  3.00     0 1.00 
+##  7    47 Jurgen ~ Excel~  25.0  33.0  2970     0    2.00  7.00     0 0.700
+##  8    48 Kevin D~ Feyen~  21.0  18.0  1694     0    4.00  1.00     0 0.800
+##  9    54 Sergio ~ FC Gr~  28.0  34.0  3060     0    0     1.00     0 0    
+## 10    54 Sergio ~ FC Gr~  28.0  34.0  3060     0    0     1.00     0 0    
+## # ... with 11,140 more rows, and 6 more variables: PS &lt;dbl&gt;,
+## #   AerialsWon &lt;dbl&gt;, MotM &lt;dbl&gt;, Rating &lt;dbl&gt;, cambio &lt;dbl&gt;,
+## #   Goal_Rate &lt;dbl&gt;</code></pre>
+<p>Corrigiendo:</p>
+<pre class="r"><code>##Seleccionemos unicamente las columnas de club y edad y filtremos por club.
+players_score %&gt;%
+  filter(Goals &gt; 0) %&gt;%
+  mutate(Goal_Rate = Mins/Goals) %&gt;%
+  arrange(desc(Goal_Rate)) %&gt;% 
+  distinct()</code></pre>
+<pre><code>## # A tibble: 3,199 x 17
+##     Rank player  club      age  Apps  Mins Goals Assists   Yel   Red   SpG
+##    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1     2 Curtis~ Derby    33.0  48.0  4313  1.00    3.00  2.00  0    0.500
+##  2    68 Tim Re~ Fulham   30.0  47.0  4230  1.00    0     2.00  0    0.100
+##  3   149 Ben Gi~ Middle~  25.0  47.0  4230  1.00    3.00  6.00  0    0.400
+##  4   307 Chris ~ Reading  28.0  46.0  4126  1.00    1.00  6.00  0    0.300
+##  5   173 Conor ~ Wolver~  25.0  45.0  3975  1.00    2.00  4.00  1.00 0    
+##  6   152 Enda S~ Sheffi~  27.0  45.0  3973  1.00    4.00  9.00  0    0.200
+##  7    44 Mark B~ Bolton   28.0  44.0  3960  1.00    0    10.0   0    0.400
+##  8    58 Paul H~ Preston  30.0  44.0  3916  1.00    2.00 10.0   0    0.900
+##  9   256 Korey ~ Bristo~  27.0  44.0  3909  1.00    1.00  4.00  0    0.500
+## 10    48 Richar~ Derby    31.0  44.0  3878  1.00    5.00  4.00  0    0.500
+## # ... with 3,189 more rows, and 6 more variables: PS &lt;dbl&gt;,
+## #   AerialsWon &lt;dbl&gt;, MotM &lt;dbl&gt;, Rating &lt;dbl&gt;, cambio &lt;dbl&gt;,
+## #   Goal_Rate &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="group_by-y-summarise" class="section level2">
+<h2><code>group_by()</code> y <code>summarise()</code></h2>
+<p><code>group_by()</code> permite,valga la redundancia, agrupar el set de datos por alguna variable o parámetro en específico. <code>summarise()</code> nos habilita a realizar alguna operación aritmética o matemática a nuestro set de datos. Al utiizarse en conjunto, ambas funciones se vuelven muy poderosas.</p>
+<p>Como ejercicio, generemos una tabla que contenga el total de goles anotados por equipo.</p>
+<pre class="r"><code>players_score %&gt;%
+  select(club,Goals) %&gt;%
+  group_by(club) %&gt;%
+  summarise(team_goals= sum(Goals)) %&gt;%
+  arrange(desc(team_goals))</code></pre>
+<pre><code>## # A tibble: 332 x 2
+##    club                team_goals
+##    &lt;chr&gt;                    &lt;dbl&gt;
+##  1 Ajax                       206
+##  2 Lazio                      199
+##  3 Paris Saint Germain        179
+##  4 Vitesse                    176
+##  5 Manchester City            173
+##  6 Lyon                       168
+##  7 Real Madrid                167
+##  8 Braga                      164
+##  9 Marseille                  164
+## 10 PSV Eindhoven              164
+## # ... with 322 more rows</code></pre>
+</div>
+<div id="ejercicios-en-clase" class="section level2">
+<h2>Ejercicios en clase:</h2>
+<p>I.Quién es el jugador con:</p>
+<ol style="list-style-type: decimal">
+<li>Mejor porcentaje de pase y de cuál club es.</li>
+</ol>
+<p>2.Que más veces ha sido Man of the Match y su índice de goles por minuto.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Más joven con más goles anotados a través de todo el set de datos.</li>
+</ol>
+<p>4.Que entra de cambio más efectivo al momento de anotar goles.</p>
+<p>5.más “sucio” del dataset.</p>
+<p>II ¿Cuál es el mejor equipo de todos? ¿Por qué?</p>
+</div>
 </div>
 
 
