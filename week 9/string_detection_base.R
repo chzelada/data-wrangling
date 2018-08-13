@@ -32,3 +32,4 @@ ggplot(data = ban, aes(x=reorder(message,-n),y=n,group=1)) + geom_point() +
 longtailban %>% View()
 
 write.csv(longtailban, file = "longtail_ban.csv")
+

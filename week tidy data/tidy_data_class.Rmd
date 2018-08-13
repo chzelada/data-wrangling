@@ -105,7 +105,7 @@ Luego, creamos una columna llamada age donde extraemos todo el texto despues del
 
 clean$sex <- str_sub(clean$column, start = 1,end = 1)
 
-ages <- c("04" = "0-4", "514" = "5-14", "014" = "0-14", "1524" = "15-24", "2534" = "25-34", "3544" = "35-44",s "4554" = "45-54", "5564" = "55-64", "65"= "65+", "u" = NA)
+ages <- c("04" = "0-4", "514" = "5-14", "014" = "0-14", "1524" = "15-24", "2534" = "25-34", "3544" = "35-44", "4554" = "45-54", "5564" = "55-64", "65"= "65+", "u" = NA)
 
 clean$age <- factor(ages[str_sub(clean$column, 2)], levels = ages)
 
