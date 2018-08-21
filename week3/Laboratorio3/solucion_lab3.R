@@ -2,8 +2,8 @@
 require(dplyr)
 require(readxl)
 require(tidyverse)
-require(plotly)
 require(leaflet)
+require(plotly)
 
 setwd("~/GitHub/data-wrangling/data/01")
 
@@ -12,8 +12,43 @@ inv <- read.csv("tabla_completa.csv")
 
 #Consideraciones
 dias_mes = 26
-dias_anio = 365
+dias_anio = 286
 crecimiento = 0.05
+
+#Estado actual de la empresa
+#Si esta en blanco, es despacho
+summary(inv)
+inv$Tipo <- ifelse(str_detect(inv$CLIENTE, "Faltante")==TRUE,
+                   "Faltante",
+                   ifelse(str_detect(inv$CLIENTE,"DEVOLUCION")==TRUE,
+                          "Devolucion",
+                          "Despacho"))
+inv %>%
+  dplyr::group_by(Tipo) %>%
+  dplyr::summarise(Cantidad=sum(CANTIDAD),
+                   Total=sum(Q),
+                   Pilotos=length(unique(PILOTO)),
+                   Viajes=n()) %>%
+  dplyr::mutate(PorcentajeQ = Total/sum(Total),
+                mensualQ = Total/11)
+
+#promedio de viajes para devolucion, faltante y despacho
+inv %>% 
+  dplyr::group_by(Tipo) %>%
+  dplyr::summarise(Viajes=n()/11)
+
+actual <- inv %>%
+  dplyr::group_by(MES,Tipo) %>%
+  dplyr::summarise(Viajes=n())
+
+plot_ly(
+  data=actual,
+  x=~MES,
+  y=~Viajes,
+  color=~Tipo,
+  type="bar"
+) %>%
+  layout(barmode="stack")
 
 #Pregunta 1
 inv %>%
