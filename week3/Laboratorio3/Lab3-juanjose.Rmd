@@ -1,0 +1,93 @@
+---
+title: "Lab3"
+author: "Juan Cartagena"
+date: "August 12, 2018"
+output: html_document
+---
+Resolucion del Lab#3
+
+```{r, echo=FALSE}
+library(readxl)
+library(dplyr)
+mydata<-read.csv("C:/Users/JR29/Documents/GitHub/data-wrangling/data/01/tabla_completa.csv")
+```
+
+Invertir en personal
+``` {r}
+##personal invertir
+personal<-mydata%>%
+  select(CLIENTE,CANTIDAD)%>%
+  group_by(CLIENTE)%>%
+  summarise(Cant.=sum(CANTIDAD))%>%
+  arrange(desc(Cant.))
+View(personal)
+```
+se nota que en la mayoria de los clientes tienen faltante mayores a su despacho o se aproximan a su despacho
+
+Invertir en vehiculos
+```{r}
+##vehiculos invertir
+mydata %>% 
+  group_by(UNIDAD) %>% 
+  summarise(viajes = length(UNIDAD), Quetzales=sum(Q, na.nm=TRUE), Ganancia=Quetzales/viajes)
+```
+Debemos de invertir en Camion Grande porque la ganancia por viaje es mayor
+
+```{r}
+mydata %>%
+     group_by(UNIDAD)%>%
+      summarise(viajes=length(UNIDAD), RT=viajes/256, KM=viajes)
+```
+Indica que 5 viajes diarios hizo con camion grande, 2 con camiones pequenos y 1 panel debido a que el km respectivo diario es 242, 302 y 364. Hay que cambiar la panel por un camion grande pero por el deterioro de todos vehiculos y la depreciacion se cambiarian tres. 
+
+
+Tarifas aceptables
+```{r}
+mydata %>% 
+  group_by(CLIENTE) %>% 
+  summarise(viajes = length(CLIENTE), Quetzales=sum(Q, na.nm=TRUE), Ganancia=Quetzales/viajes, Credit=sum(CREDITO,na.nm=TRUE), Dias=Credit/viajes)%>%
+  arrange(Dias)
+```
+Del punto de vista del cliente si porque tiene dias de credito pero para nosotros no porque demasiado tiempo para recuperar el dinero
+
+
+Nos estan robando 
+```{r}
+mydata %>% 
+  group_by(PILOTO) %>% 
+  summarise(viajes = length(PILOTO), RT=viajes/(257))
+```
+Apenas hacen un viaje diario
+
+
+Estrategias
+```{r}
+#Contrar a mas personal, invertir en mas camiones y negociar los dias de creditos con los clientes o determinar fechas de pagos para que todos los meses tengamos flujo de efectivo
+```
+
+Mejores clientes
+```{r}
+mydata %>% 
+  group_by(CLIENTE) %>% 
+  summarise(viajes = length(CLIENTE), Quetzales=sum(Q, na.nm=TRUE), Ganancia=Quetzales/viajes, Credit=sum(CREDITO,na.nm=TRUE), Dias=Credit/viajes)%>%
+  arrange(Dias)
+```
+Indica cuales son los mejores clientes porque pagan mas rapido para que tengamos flujo de efectivo
+
+
+Transporte mas efectivo
+```{r}
+mydata %>% 
+  group_by(UNIDAD) %>% 
+  summarise(viajes = length(UNIDAD), Quetzales=sum(Q, na.nm=TRUE), Ganancia=Quetzales/viajes, Credit=sum(CREDITO,na.nm=TRUE))
+```
+Camion grande es mas efectivo porque tiene mas ganancia por viaje y en promedio tiene mas dias de credito.
+
+Transporte mas efectivo
+```{r}
+mydata %>% 
+  group_by(PILOTO) %>% 
+  summarise(viajes = length(PILOTO), Quetzales=sum(Q, na.nm=TRUE), Ganancia=Quetzales/viajes)%>%
+  arrange(desc(Ganancia))
+```
+orden de los mejores pilotos porque obtienen mas ganancia por viaje
